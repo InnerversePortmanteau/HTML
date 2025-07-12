@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>An Invitation to Us - A Dynamic Living Agreement</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background-size: 400% 400%;
+            animation: gradientFlow 15s ease infinite;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 60px 50px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+            background-size: 200% 200%;
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.2em;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            font-size: 1.3em;
+            color: #667eea;
+            font-weight: 300;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        .dedication {
+            font-size: 1.1em;
+            color: #7f8c8d;
+            font-weight: 500;
+            margin-top: 20px;
+        }
+
+        .invitation-intro {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .invitation-intro::before {
+            content: '💝';
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            font-size: 3em;
+            opacity: 0.3;
+            transform: rotate(15deg);
+        }
+
+        .invitation-intro h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .invitation-intro p {
+            font-size: 1.2em;
+            color: #2c3e50;
+            line-height: 1.8;
+            font-weight: 400;
+        }
+
+        .section {
+            margin-bottom: 50px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 20px;
+            border-left: 6px solid #667eea;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .section h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            color: white;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .section p {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            color: #34495e;
+        }
+
+        .section .highlight {
+            background: linear-gradient(135deg, #a8edea, #fed6e3);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #667eea;
+            font-style: italic;
+        }
+
+        .commitment-section {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            text-align: center;
+            margin: 50px 0;
+        }
+
+        .commitment-section h3 {
+            color: white;
+            justify-content: center;
+        }
+
+        .commitment-section .section-icon {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .promise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .promise-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .promise-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .promise-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            color: #ffeaa7;
+        }
+
+        .closing {
+            background: linear-gradient(135deg, #ffeaa7, #fab1a0);
+            padding: 50px;
+            border-radius: 20px;
+            text-align: center;
+            margin-top: 50px;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .closing::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="50%" font-size="20" fill="rgba(255,255,255,0.1)">💕</text></svg>');
+            background-size: 50px 50px;
+            animation: float 20s linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-100px); }
+        }
+
+        .closing h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5em;
+            color: #2c3e50;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .closing p {
+            font-size: 1.3em;
+            color: #2c3e50;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .signature {
+            margin-top: 40px;
+            text-align: right;
+            font-style: italic;
+            color: #7f8c8d;
+            font-size: 1.1em;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hearts {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2em;
+            opacity: 0.3;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.7; }
+        }
+
+        .interactive-element {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .interactive-element:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 30px;
+            }
+            
+            .title {
+                font-size: 2.5em;
+            }
+            
+            .subtitle {
+                font-size: 1.1em;
+            }
+            
+            .section {
+                padding: 30px 25px;
+            }
+            
+            .section h3 {
+                font-size: 1.5em;
+            }
+            
+            .promise-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .interactive-element {
+                bottom: 20px;
+                right: 20px;
+                width: 60px;
+                height: 60px;
+                font-size: 1.5em;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+            
+            .container {
+                background: white;
+                box-shadow: none;
+                border: 2px solid #667eea;
+            }
+            
+            .interactive-element {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts">💕</div>
+    
+    <div class="container">
+        <div class="header">
+            <h1 class="title">An Invitation to Us</h1>
+            <p class="subtitle">A Dynamic Living Agreement</p>
+            <p class="dedication">For my beloved wife, my partner in all things</p>
+        </div>
+
+        <div class="invitation-intro">
+            <h2>My Dearest Love,</h2>
+            <p>I offer you this invitation—not as a demand or expectation, but as an open door to a new way of being together. This is my heart's proposal for how we might choose to live, love, and grow alongside each other. It's an offer that stands in perpetuity, waiting for whenever you feel ready to step through this door with me.</p>
+        </div>
+
+        <div class="section">
+            <h3><span class="section-icon">🌱</span>Our Living Agreement</h3>
+            <p>Marriage, at its core, is a <strong>dynamic living agreement</strong>, rooted in the profound understanding that we are both human and we both have ever-evolving needs. This isn't a static contract or a list of perfectly fulfilled obligations. Instead, it's a mutual, ongoing commitment to cultivate a shared space defined by intentional vulnerability and continuous growth.</p>
+            <div class="highlight">
+                This foundation rests not on our current capacity to flawlessly meet every need, but on the intent and the willingness to learn how to do so more effectively over time. It's an act of faith that through persistent, mutual effort, we can evolve towards a deeper, more harmonious connection.
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="section-icon">🗣️</span>Publishing Needs: The Act of Trust</h3>
+            <p>We both commit to the ongoing practice of openly communicating our individual needs—emotional, practical, intellectual, physical, or spiritual. This "publishing" is a crucial act of trust, transforming unspoken desires or frustrations into shared information.</p>
+            <p>It acknowledges that holding needs in silence often leads to misunderstanding and distance. When we speak our needs, we create the possibility for deeper intimacy and understanding.</p>
+        </div>
+
+        <div class="section">
+            <h3><span class="section-icon">👂</span>Hearing Needs: The Core Commitment</h3>
+            <p>There is a fundamental, non-negotiable commitment to deeply hear and acknowledge each other's published needs. This means engaging in active, empathetic listening focused on understanding, rather than immediate problem-solving, judgment, or defensiveness.</p>
+            <div class="highlight">
+                The primary expectation isn't that every need will be perfectly met right away, but that it will be received with care, respect, and a genuine effort to comprehend.
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="section-icon">🦋</span>Permission for Authenticity: Safety in Expression</h3>
+            <p>We grant each other unconditional permission to be fully authentic, embracing all our evolving needs, desires, and even imperfections. This creates an atmosphere free from shame or fear of rejection when needs are expressed.</p>
+            <p>This permission isn't a passive allowance; it's actively given because it fundamentally strengthens the very fabric of our relationship.</p>
+        </div>
+
+        <div class="section">
+            <h3><span class="section-icon">🤝</span>Shared Stewardship: Learning as We Go</h3>
+            <p>The ongoing process of publishing and hearing needs becomes the central work of our marriage. We both recognize that the health and vitality of our relationship itself hinges on this continuous exchange and the shared effort to learn.</p>
+            <p>It's our mutual responsibility to nurture this open channel, understanding that a strong relationship provides the best environment for individual needs to be addressed over time, even as our capacity grows.</p>
+        </div>
+
+        <div class="section">
+            <h3><span class="section-icon">🛡️</span>Guarantee of Safety: Time to Process</h3>
+            <p>Crucially, safety can always be achieved by stating, <em>"I need some time to process this."</em> Such a statement is guaranteed to be met with understanding, patience, and respect.</p>
+            <p>It's an agreed-upon mechanism to manage intense moments, allowing space for calm reflection and ensuring that difficult conversations can proceed constructively when both parties are ready.</p>
+            <div class="highlight">
+                This isn't a deferral, but a responsible pause, demonstrating commitment to careful consideration.
+            </div>
+        </div>
+
+        <div class="section commitment-section">
+            <h3><span class="section-icon">💫</span>What This Means for Us</h3>
+            <div class="promise-grid">
+                <div class="promise-card">
+                    <h4>Continuous Discovery</h4>
+                    <p>Every day becomes an opportunity to learn something new about each other, to discover deeper layers of who we are becoming.</p>
+                </div>
+                <div class="promise-card">
+                    <h4>Reciprocal Care</h4>
+                    <p>We hold each other's hearts with tenderness, knowing that our love is both a gift and a responsibility.</p>
+                </div>
+                <div class="promise-card">
+                    <h4>Grace in Growth</h4>
+                    <p>We embrace our shared humanity, allowing room for mistakes, learning, and the beautiful messiness of being human together.</p>
+                </div>
+                <div class="promise-card">
+                    <h4>Empathy as Foundation</h4>
+                    <p>Our willingness to truly see and understand each other becomes the bedrock upon which everything else is built.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="closing">
+            <h2>My Promise to You</h2>
+            <p>This dynamic living agreement frames our marriage as a journey of continuous discovery and reciprocal care, built on empathy and a shared commitment to keep learning and growing together.</p>
+            <p>It's an embrace of our shared humanity, recognizing that our willingness to engage with our needs and each other's, with grace and patience, is what truly defines and strengthens our bond.</p>
+            <p><strong>This invitation stands open, always. There is no timeline, no pressure, no condition. It's simply here, waiting for us whenever we're ready to step into this beautiful way of being together.</strong></p>
+            <div class="signature">
+                With all my love and infinite hope for us,<br>
+                Your devoted husband 💕
+            </div>
+        </div>
+    </div>
+
+    <div class="interactive-element" onclick="showLoveMessage()" title="Click for a special message">
+        💝
+    </div>
+
+    <script>
+        function showLoveMessage() {
+            const messages = [
+                "You are my greatest adventure 💕",
+                "Growing old with you is my favorite dream 🌟",
+                "In you, I found my forever 💫",
+                "You make every day feel like magic ✨",
+                "Our love story is my favorite 📖",
+                "With you, I am home 🏠",
+                "You are my today and all of my tomorrows 🌅"
+            ];
+            
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            
+            // Create a temporary notification
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: linear-gradient(135deg, #667eea, #764ba2);
+                color: white;
+                padding: 30px 40px;
+                border-radius: 20px;
+                font-size: 1.3em;
+                text-align: center;
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+                z-index: 10000;
+                animation: fadeInOut 4s ease-in-out;
+                backdrop-filter: blur(10px);
+                border: 2px solid rgba(255, 255, 255, 0.2);
+            `;
+            
+            notification.innerHTML = randomMessage;
+            document.body.appendChild(notification);
+            
+            // Add CSS for animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes fadeInOut {
+                    0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+                    20% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+                    80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+                    100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // Remove after animation
+            setTimeout(() => {
+                document.body.removeChild(notification);
+                document.head.removeChild(style);
+            }, 4000);
+        }
+
+        // Add some interactive sparkles
+        function createSparkle() {
+            const sparkle = document.createElement('div');
+            sparkle.innerHTML = '✨';
+            sparkle.style.cssText = `
+                posit
