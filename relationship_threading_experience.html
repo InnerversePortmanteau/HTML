@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Main Thread of Love</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: white;
+            font-family: 'Arial', sans-serif;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Floating particles background */
+        .particles {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            from {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10%, 90% {
+                opacity: 1;
+            }
+            to {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Header */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #f9ca24);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 8s ease-in-out infinite;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 30px rgba(255, 107, 107, 0.3);
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            opacity: 0.8;
+            max-width: 600px;
+            line-height: 1.6;
+            margin-bottom: 3rem;
+        }
+
+        /* Threading Visualization */
+        .thread-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: 2rem auto;
+        }
+
+        .main-thread {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 60px;
+            height: 60px;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle, #4ecdc4, #45b7d1);
+            border-radius: 50%;
+            box-shadow: 0 0 50px rgba(78, 205, 196, 0.6);
+            animation: pulse 3s ease-in-out infinite;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .main-thread:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+            box-shadow: 0 0 80px rgba(78, 205, 196, 0.8);
+        }
+
+        .worker-thread {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(45deg, #ff6b6b, #ff8e53);
+            border-radius: 50%;
+            animation: orbit 8s linear infinite;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .worker-thread.chaotic {
+            animation: chaotic-orbit 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.05); }
+        }
+
+        @keyframes orbit {
+            from { transform: rotate(0deg) translateX(120px) rotate(0deg); }
+            to { transform: rotate(360deg) translateX(120px) rotate(-360deg); }
+        }
+
+        @keyframes chaotic-orbit {
+            0% { transform: rotate(0deg) translateX(120px) rotate(0deg) scale(1); }
+            25% { transform: rotate(90deg) translateX(140px) rotate(-90deg) scale(1.2); }
+            50% { transform: rotate(180deg) translateX(100px) rotate(-180deg) scale(0.8); }
+            75% { transform: rotate(270deg) translateX(130px) rotate(-270deg) scale(1.1); }
+            100% { transform: rotate(360deg) translateX(120px) rotate(-360deg) scale(1); }
+        }
+
+        /* Section Styling */
+        .section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            background: linear-gradient(45deg, #4ecdc4, #45b7d1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Interactive Cards */
+        .phase-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .phase-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .phase-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(78, 205, 196, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .phase-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(78, 205, 196, 0.2);
+            border-color: rgba(78, 205, 196, 0.3);
+        }
+
+        .phase-card:hover::before {
+            left: 100%;
+        }
+
+        .phase-card h3 {
+            color: #4ecdc4;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .phase-card p {
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        /* Interactive Threading Demo */
+        .threading-demo {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .demo-controls {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .demo-button {
+            background: linear-gradient(45deg, #4ecdc4, #45b7d1);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .demo-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(78, 205, 196, 0.3);
+        }
+
+        .demo-button.active {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e53);
+        }
+
+        /* Visualization States */
+        .viz-container {
+            position: relative;
+            height: 400px;
+            margin: 2rem 0;
+        }
+
+        .connection-line {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg, #4ecdc4, #45b7d1);
+            top: 50%;
+            left: 20%;
+            width: 60%;
+            transform-origin: left center;
+            transition: all 1s ease;
+            opacity: 0;
+        }
+
+        .connection-line.active {
+            opacity: 1;
+            animation: connectionFlow 2s ease-in-out infinite;
+        }
+
+        @keyframes connectionFlow {
+            0%, 100% { transform: scaleX(1); opacity: 1; }
+            50% { transform: scaleX(1.2); opacity: 0.7; }
+        }
+
+        .partner {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: all 1s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        .partner-a {
+            left: 10%;
+            background: radial-gradient(circle, #4ecdc4, #45b7d1);
+            box-shadow: 0 0 30px rgba(78, 205, 196, 0.5);
+        }
+
+        .partner-b {
+            right: 10%;
+            background: radial-gradient(circle, #f9ca24, #f0932b);
+            box-shadow: 0 0 30px rgba(249, 202, 36, 0.5);
+        }
+
+        .partner.defensive {
+            background: radial-gradient(circle, #ff6b6b, #ee5a52);
+            box-shadow: 0 0 30px rgba(255, 107, 107, 0.5);
+            animation: defensiveShake 0.5s ease-in-out infinite;
+        }
+
+        @keyframes defensiveShake {
+            0%, 100% { transform: translateY(-50%) rotate(0deg); }
+            25% { transform: translateY(-50%) rotate(-2deg); }
+            75% { transform: translateY(-50%) rotate(2deg); }
+        }
+
+        .status-text {
+            position: absolute;
+            bottom: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            font-size: 1.2rem;
+            opacity: 0.8;
+            transition: all 0.5s ease;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1.1rem; padding: 0 1rem; }
+            .section { padding: 2rem 1rem; }
+            .demo-controls { flex-direction: column; align-items: center; }
+            .partner { width: 60px; height: 60px; font-size: 1.5rem; }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="particles"></div>
+    
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>The Main Thread of Love</h1>
+            <p>Discover how the deepest insights from software debugging reveal the secrets to authentic relationship connection</p>
+            
+            <div class="thread-container" id="heroThreads">
+                <div class="main-thread" title="Your Authentic Self - The Main Thread"></div>
+                <div class="worker-thread" style="--delay: 0s;"></div>
+                <div class="worker-thread" style="--delay: 2s;"></div>
+                <div class="worker-thread" style="--delay: 4s;"></div>
+                <div class="worker-thread" style="--delay: 6s;"></div>
+            </div>
+            
+            <p style="font-size: 1rem; opacity: 0.6;">Click the center circle to see what happens when you operate from your main thread</p>
+        </section>
+
+        <!-- The Problem Section -->
+        <section class="section fade-in">
+            <h2>The Relationship Race Condition</h2>
+            <p style="text-align: center; font-size: 1.2rem; line-height: 1.8; opacity: 0.9; margin-bottom: 2rem;">
+                Just like in software, relationships can experience devastating race conditions where two processes try to run simultaneously, creating deadlock instead of connection.
+            </p>
+
+            <div class="threading-demo">
+                <h3 style="color: #4ecdc4; margin-bottom: 2rem;">Interactive Relationship Threading Demo</h3>
+                <div class="demo-controls">
+                    <button class="demo-button" onclick="showDeadlock()">Show Deadlock</button>
+                    <button class="demo-button" onclick="showResolution()">Show Resolution</button>
+                    <button class="demo-button" onclick="resetDemo()">Reset</button>
+                </div>
+                
+                <div class="viz-container">
+                    <div class="partner partner-a" id="partnerA" title="Partner A">💝</div>
+                    <div class="partner partner-b" id="partnerB" title="Partner B">💝</div>
+                    <div class="connection-line" id="connectionLine"></div>
+                    <div class="status-text" id="statusText">Two hearts seeking connection...</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Phase Cards Section -->
+        <section class="section fade-in">
+            <h2>The Five Phases of Harmonic Connection</h2>
+            
+            <div class="phase-cards">
+                <div class="phase-card" onclick="activatePhase(1)">
+                    <h3>Phase 1: Recognition & Pause</h3>
+                    <p><strong>The Main Thread Rule:</strong> Both partners must recognize when they're operating from defensive worker threads instead of their authentic main thread. Only from the main thread can true vulnerability be initiated.</p>
+                </div>
+
+                <div class="phase-card" onclick="activatePhase(2)">
+                    <h3>Phase 2: Individual Frequency Tuning</h3>
+                    <p><strong>Critical Learning:</strong> You cannot suspend your own defenses from a defensive state. Each person must return to their emotional "main thread" before attempting any healing work.</p>
+                </div>
+
+                <div class="phase-card" onclick="activatePhase(3)">
+                    <h3>Phase 3: Synchronized Protocols</h3>
+                    <p><strong>The Authority Problem:</strong> Only you can suspend your own reactivity. Your partner cannot force you to pause, and you cannot force them. Each person controls their own emotional threading.</p>
+                </div>
+
+                <div class="phase-card" onclick="activatePhase(4)">
+                    <h3>Phase 4: Practice & Integration</h3>
+                    <p><strong>The Worker Thread Temptation:</strong> During practice, couples often fall back into handling conversations from habitual defensive patterns instead of authentic presence.</p>
+                </div>
+
+                <div class="phase-card" onclick="activatePhase(5)">
+                    <h3>Phase 5: Harmonic Resonance</h3>
+                    <p><strong>Natural Authority:</strong> Both partners naturally operate from their main emotional threads, intuitively knowing when to suspend defenses and support each other's authentic expression.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- The Solution Section -->
+        <section class="section fade-in">
+            <h2>The Revolutionary Insight</h2>
+            <div style="text-align: center; max-width: 800px; margin: 0 auto;">
+                <div style="background: rgba(78, 205, 196, 0.1); border-radius: 20px; padding: 3rem; margin: 2rem 0; border-left: 5px solid #4ecdc4;">
+                    <h3 style="color: #4ecdc4; margin-bottom: 1.5rem; font-size: 1.8rem;">You Cannot Debug Love From The Same State That Broke It</h3>
+                    <p style="font-size: 1.3rem; line-height: 1.7;">
+                        Just as you cannot call <code style="background: rgba(0,0,0,0.3); padding: 0.2rem 0.5rem; border-radius: 5px;">suspend()</code> from a worker thread, you cannot create authentic connection from defensive or protective emotional states.
+                    </p>
+                </div>
+                
+                <p style="font-size: 1.2rem; line-height: 1.8; opacity: 0.9; margin-top: 2rem;">
+                    The breakthrough comes when both partners learn to identify their emotional "main thread" - that centered, authentic self from which true vulnerability and connection become possible. Only from this thread can you safely suspend your defenses and engage in the vulnerable conversations that create lasting intimacy.
+                </p>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="section fade-in" style="text-align: center; padding-bottom: 6rem;">
+            <h2>Begin Your Own Threading Journey</h2>
+            <p style="font-size: 1.2rem; line-height: 1.8; max-width: 600px; margin: 0 auto 3rem; opacity: 0.9;">
+                The path to harmonic resonance begins with learning to recognize and operate from your own emotional main thread. From there, everything changes.
+            </p>
+            
+            <div class="thread-container">
+                <div class="main-thread" onclick="showFinalMessage()" style="cursor: pointer;" title="Click to discover your main thread"></div>
+            </div>
+            
+            <p style="font-size: 1rem; opacity: 0.6; margin-top: 1rem;">Click your main thread to begin</p>
+        </section>
+    </div>
+
+    <script>
+        // Create floating particles
+        function createParticles() {
+            const particles = document.querySelector('.particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                particles.appendChild(particle);
+            }
+        }
+
+        // Fade in animation on scroll
+        function handleScrollAnimations() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            fadeElements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 100) {
+                    el.classList.add('visible');
+                }
+            });
+        }
+
+        // Demo functions
+        function showDeadlock() {
+            const partnerA = document.getElementById('partnerA');
+            const partnerB = document.getElementById('partnerB');
+            const connectionLine = document.getElementById('connectionLine');
+            const statusText = document.getElementById('statusText');
+            
+            partnerA.classList.add('defensive');
+            partnerB.classList.add('defensive');
+            connectionLine.classList.remove('active');
+            statusText.textContent = "DEADLOCK: Both operating from defensive worker threads!";
+            statusText.style.color = '#ff6b6b';
+        }
+
+        function showResolution() {
+            const partnerA = document.getElementById('partnerA');
+            const partnerB = document.getElementById('partnerB');
+            const connectionLine = document.getElementById('connectionLine');
+            const statusText = document.getElementById('statusText');
+            
+            partnerA.classList.remove('defensive');
+            partnerB.classList.remove('defensive');
+            connectionLine.classList.add('active');
+            statusText.textContent = "HARMONY: Both operating from authentic main threads!";
+            statusText.style.color = '#4ecdc4';
+        }
+
+        function resetDemo() {
+            const partnerA = document.getElementById('partnerA');
+            const partnerB = document.getElementById('partnerB');
+            const connectionLine = document.getElementById('connectionLine');
+            const statusText = document.getElementById('statusText');
+            
+            partnerA.classList.remove('defensive');
+            partnerB.classList.remove('defensive');
+            connectionLine.classList.remove('active');
+            statusText.textContent = "Two hearts seeking connection...";
+            statusText.style.color = 'white';
+        }
+
+        function activatePhase(phaseNum) {
+            // Add visual feedback for phase activation
+            const cards = document.querySelectorAll('.phase-card');
+            cards.forEach(card => card.style.background = 'rgba(255, 255, 255, 0.05)');
+            event.target.style.background = 'rgba(78, 205, 196, 0.1)';
+            
+            // Could add more interactive elements here
+            console.log('Phase', phaseNum, 'activated');
+        }
+
+        function showFinalMessage() {
+            alert("Your main thread is that quiet, centered voice within you that speaks from love rather than fear. It's the part of you that remains calm in storms, curious in conflict, and open in vulnerability. This is where authentic connection begins. 💝");
+        }
+
+        // Hero thread interaction
+        document.getElementById('heroThreads').addEventListener('click', function(e) {
+            if (e.target.classList.contains('main-thread')) {
+                const workerThreads = document.querySelectorAll('#heroThreads .worker-thread');
+                workerThreads.forEach(thread => {
+                    thread.classList.toggle('chaotic');
+                });
+                
+                setTimeout(() => {
+                    workerThreads.forEach(thread => {
+                        thread.classList.remove('chaotic');
+                    });
+                }, 3000);
+            }
+        });
+
+        // Initialize
+        createParticles();
+        window.addEventListener('scroll', handleScrollAnimations);
+        handleScrollAnimations(); // Initial check
+    </script>
+</body>
+</html>
