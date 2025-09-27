@@ -43,7 +43,7 @@
             position: relative;
             padding: 5rem 2rem;
             background: linear-gradient(45deg, rgba(102, 126, 234, 0.85), rgba(118, 75, 162, 0.85)),
-                        url('web_images/kintsugi.png');
+                        url('https://placehold.co/1200x600/2c3e50/ffffff?text=Kintsugi');
             background-size: cover;
             background-position: center;
             text-align: center;
@@ -88,134 +88,64 @@
             margin-bottom: 2rem;
         }
 
-        .choice-grid {
+        .choice-grid, .question-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 2rem;
             margin-top: 2rem;
-            align-items: flex-start;
+            align-items: center;
         }
 
-        .choice-card {
+        .choice-card, .question-card {
             padding: 2.5rem;
             border-radius: var(--border-radius);
             border: 2px solid #e9ecef;
         }
 
-        .choice-card h3 {
+        .choice-card h3, .question-card h3 {
             font-size: 1.5rem;
             margin-bottom: 1rem;
         }
-
-        .choice-card img {
-            width: 100%;
-            border-radius: 8px;
-            margin-top: 1.5rem;
-        }
         
-        .choice-card.myth {
+        .choice-card.myth, .question-card.old {
             background-color: #fff9f9;
             border-color: var(--accent-color);
         }
 
-        .choice-card.myth h3 {
+        .choice-card.myth h3, .question-card.old h3 {
             color: var(--accent-color);
         }
         
-        .choice-card.realization {
+        .choice-card.realization, .question-card.better {
             background-color: #f8f9ff;
             border-color: var(--primary-color);
         }
 
-        .choice-card.realization h3 {
+        .choice-card.realization h3, .question-card.better h3 {
             color: var(--primary-color);
         }
-        
-        .section-image {
-            width: 100%;
-            max-width: 500px;
-            display: block;
-            margin: 2rem auto;
-            border-radius: var(--border-radius);
-        }
 
-        .models-grid {
+        .models-grid, .tactics-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin-top: 2rem;
         }
-        
-        .tactic-container {
-            perspective: 1000px;
-        }
-        
-        .tactic-card {
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 0.8s;
-            cursor: pointer;
-            min-height: 250px;
-        }
-        
-        .tactic-card.is-flipped {
-            transform: rotateY(180deg);
-        }
 
-        .tactic-card-face {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            background: var(--bg-light);
-            padding: 2rem;
-            border-radius: var(--border-radius);
-            border-bottom: 4px solid #ccc;
-        }
-        
-        .tactic-card-back {
-            transform: rotateY(180deg);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-        
-        .tactic-card-back h5 {
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-            color: var(--primary-color);
-        }
-        
-        .tactic-card-back p {
-            font-style: italic;
-        }
-
-        .model-card, .tactic-grid {
+        .model-card, .tactic-card {
             background: var(--bg-light);
             padding: 2rem;
             border-radius: var(--border-radius);
             border-bottom: 4px solid #ccc;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        
-        .tactic-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-            padding: 0;
-            background: none;
-            border: none;
-        }
 
-        .model-card:hover {
+        .model-card:hover, .tactic-card:hover {
            transform: translateY(-5px);
            box-shadow: 0 10px 25px rgba(0,0,0,0.07);
         }
 
-        .model-card h4, .tactic-card-face h4 {
+        .model-card h4, .tactic-card h4 {
             font-size: 1.3rem;
             margin-bottom: 0.5rem;
         }
@@ -226,7 +156,7 @@
             margin-bottom: 1rem;
         }
         
-        .tactic-card-face .metaphor {
+        .tactic-card .metaphor {
             font-weight: 700;
             font-style: italic;
             margin-bottom: 1rem;
@@ -237,45 +167,9 @@
         .model-believer { border-color: #45aaf2; }
         .model-fatalist { border-color: #a55eea; }
         
-        .tactic-shutdown .tactic-card-face { border-color: #a55eea; }
-        .tactic-filibuster .tactic-card-face { border-color: #eb3b5a; }
-        .tactic-redistricting .tactic-card-face { border-color: #eb3b5a; }
-        
-        .quiz-container {
-            background-color: var(--bg-light);
-            padding: 2rem;
-            border-radius: var(--border-radius);
-            margin-top: 2rem;
-        }
-        .quiz-question {
-            margin-bottom: 1.5rem;
-        }
-        .quiz-question p {
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-        .quiz-options button {
-            display: block;
-            width: 100%;
-            padding: 1rem;
-            margin-bottom: 0.5rem;
-            text-align: left;
-            background: #fff;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.2s, border-color 0.2s;
-        }
-        .quiz-options button:hover {
-            background-color: #f0f2f5;
-            border-color: var(--primary-color);
-        }
-        #quiz-result {
-            margin-top: 2rem;
-            padding: 1.5rem;
-            border-radius: var(--border-radius);
-            display: none;
-        }
+        .tactic-shutdown { border-color: #a55eea; } /* Fatalist */
+        .tactic-filibuster { border-color: #eb3b5a; } /* Cynic */
+        .tactic-redistricting { border-color: #eb3b5a; } /* Cynic */
 
         .failsafe {
             background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
@@ -320,6 +214,30 @@
         .wrongness-points li:hover {
             transform: translateX(5px);
         }
+        
+        .lw-connection {
+            margin-top: 3rem;
+            padding: 2.5rem;
+            background-color: var(--bg-light);
+            border-radius: var(--border-radius);
+            border: 1px solid #dee2e6;
+        }
+
+        .lw-connection h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .lw-connection a {
+            color: var(--secondary-color);
+            font-weight: 600;
+            text-decoration: none;
+        }
+        
+        .lw-connection a:hover {
+            text-decoration: underline;
+        }
 
         .cta {
             text-align: center;
@@ -340,7 +258,7 @@
             .content { padding: 2rem 1.5rem; }
             .hero h1 { font-size: 2.5rem; }
             .hero p { font-size: 1.2rem; }
-            .choice-grid, .models-grid, .tactic-grid { grid-template-columns: 1fr; }
+            .choice-grid, .models-grid, .tactics-grid, .question-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -348,24 +266,22 @@
     <div class="container">
         <div class="hero">
             <h1>The Connection Playbook</h1>
-            <p>A practical guide to transforming conflict from a battlefield into a workshop for mutual understanding.</p>
+            <p>A humble collection of ideas for turning conflict from a battlefield into a workshop for mutual understanding.</p>
         </div>
 
         <div class="content">
             <!-- SECTION 1: THE CORE CHOICE -->
             <div class="section">
                 <h2>The First Choice: Your Map for Connection</h2>
-                <p class="intro-text">Every interaction, especially the difficult ones, begins with a subconscious choice about the nature of connection itself. Do you believe it's a long, arduous journey or something you can access right now? Recognizing this belief is the first step.</p>
+                <p class="intro-text">Perhaps every difficult interaction begins with a subconscious choice about the nature of connection itself. Do we believe it's a long, arduous journey or something we can access right now? Gently noticing this belief might be the first step.</p>
                 <div class="choice-grid">
                     <div class="choice-card myth">
                         <h3>The Yellow Brick Road Myth</h3>
                         <p>The exhausting belief that connection is a faraway Oz. You think you must vanquish witches, win over wizards, and prove your worth just to get back home to a place of understanding.</p>
-                        <img src="web_images/yellowbrickroad.png" alt="A long, winding, and difficult path leading to a distant castle.">
                     </div>
                     <div class="choice-card realization">
                         <h3>The Ruby Slipper Realization</h3>
                         <p>The profound trust that the power to connect is simple, present, and always within you. You just need to remember to "click your heels"—to use a small, concrete action to come back to yourself.</p>
-                        <img src="web_images/rubyslippers.png" alt="A pair of sparkling ruby slippers on a simple wooden floor.">
                     </div>
                 </div>
             </div>
@@ -373,8 +289,7 @@
             <!-- SECTION 2: THE MENTAL MODELS -->
             <div class="section">
                 <h2>Why We Spiral: The Stories We Tell Ourselves</h2>
-                <p class="intro-text">A spiral rarely starts with the words spoken. It starts with the unconscious worldview we apply to them. Recognizing your default lens is the key to choosing a different story.</p>
-                <img src="web_images/confusedmentalmodels.png" class="section-image" alt="A tangled knot of colorful threads, representing complex and crossed thoughts.">
+                <p class="intro-text">A spiral rarely starts with the words spoken. It often begins with the unconscious worldview we apply to them. Gently recognizing our default lens can be a key to choosing a different story.</p>
                 <div class="models-grid">
                     <div class="model-card model-hopeful">
                         <h4>The Hopeful Skeptic</h4>
@@ -397,80 +312,66 @@
                         <p><strong>Principle:</strong> Assume the worst outcome is inevitable.<br><em>"Of course this is happening. We're doomed to repeat this forever."</em></p>
                     </div>
                 </div>
-                <!-- INTERACTIVE QUIZ -->
-                <div class="quiz-container">
-                    <h3>What's Your Default Mindset?</h3>
-                    <div id="quiz">
-                        <div class="quiz-question">
-                            <p>When a difficult conversation starts, my first instinct is to...</p>
-                            <div class="quiz-options">
-                                <button data-mindset="hopeful">A) Find a logical solution, assuming the other person means well.</button>
-                                <button data-mindset="cynic">B) Prepare my defense, assuming I'm about to be attacked.</button>
-                                <button data-mindset="believer">C) Hope that if I'm positive enough, the problem will just disappear.</button>
-                                <button data-mindset="fatalist">D) Brace for the worst, because these things never go well.</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="quiz-result"></div>
-                </div>
             </div>
 
             <!-- SECTION 3: THE POLITICAL TACTICS -->
             <div class="section">
                 <h2>The Tactics of Disconnection</h2>
-                <p class="intro-text">When these mental models feel threatened, they deploy defensive tactics. These aren't just arguments; they are strategic power plays that shut down productive dialogue. Click on a card to see how to disarm it.</p>
-                <div class="tactic-grid">
-                    <div class="tactic-container tactic-shutdown">
-                        <div class="tactic-card">
-                            <div class="tactic-card-face">
-                                <h4>The Shutdown</h4>
-                                <p class="metaphor">Tactic of the Passive Fatalist</p>
-                                <p>One partner withdraws and refuses to communicate, holding the relationship hostage. This avoids accountability and leaves the other powerless.</p>
-                            </div>
-                            <div class="tactic-card-face tactic-card-back">
-                                <h5>Disarm It By Saying:</h5>
-                                <p>"I'll take the points for being wrong first, but my story is that you're shutting down because you're overwhelmed. How wrong am I?"</p>
-                            </div>
-                        </div>
+                <p class="intro-text">When our mental models feel threatened, we might deploy defensive tactics. These aren't just arguments; they can be strategic power plays that shut down productive dialogue. Simply noticing these patterns without judgment is often the first step to disarming them.</p>
+                <div class="tactics-grid">
+                    <div class="tactic-card tactic-shutdown">
+                        <h4>The Shutdown</h4>
+                        <p class="metaphor">Tactic of the Passive Fatalist</p>
+                        <p>One partner withdraws and refuses to communicate, holding the relationship hostage until their terms (usually silence) are met. This avoids accountability and leaves the other powerless.</p>
                     </div>
-                    <div class="tactic-container tactic-filibuster">
-                         <div class="tactic-card">
-                            <div class="tactic-card-face">
-                                <h4>The Filibuster</h4>
-                                <p class="metaphor">Tactic of the Straight-Up Cynic</p>
-                                <p>Dominating a conversation with lengthy, circular arguments to exhaust the other partner and prevent a resolution.</p>
-                            </div>
-                            <div class="tactic-card-face tactic-card-back">
-                                <h5>Disarm It By Saying:</h5>
-                                <p>"This is a fantastic filibuster! I'll take bonus points for admitting I'm lost. Now, let's see how wrong *you* can be about what I'm thinking."</p>
-                            </div>
-                        </div>
+                    <div class="tactic-card tactic-filibuster">
+                        <h4>The Filibuster</h4>
+                        <p class="metaphor">Tactic of the Straight-Up Cynic</p>
+                        <p>Dominating a conversation with lengthy, circular arguments to exhaust the other partner and prevent a resolution. Verbosity is used as a shield against listening or compromise.</p>
                     </div>
-                    <div class="tactic-container tactic-redistricting">
-                         <div class="tactic-card">
-                            <div class="tactic-card-face">
-                                <h4>The Redistricting</h4>
-                                <p class="metaphor">Tactic of the Straight-Up Cynic</p>
-                                <p>Manipulating the boundaries of a disagreement, like shifting goalposts or changing the rules, to gain an advantage.</p>
-                            </div>
-                            <div class="tactic-card-face tactic-card-back">
-                                <h5>Disarm It By Saying:</h5>
-                                <p>"Ah, redistricting! I get triple points for being so wrong my actions came across as disrespectful. Let's get back to the original topic."</p>
-                            </div>
-                        </div>
+                    <div class="tactic-card tactic-redistricting">
+                        <h4>The Redistricting</h4>
+                        <p class="metaphor">Tactic of the Straight-Up Cynic</p>
+                        <p>Manipulating the boundaries of a disagreement to gain an advantage, like shifting goalposts or changing the rules. This leaves the other partner disoriented and unable to negotiate fairly.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- SECTION 4: THE SOLUTION -->
+            <!-- SECTION 4: THE REAL PROBLEM -->
+            <div class="section">
+                <h2>Turning Inward: The Story We Tell Ourselves</h2>
+                <p class="intro-text">Perhaps the models and tactics above are just symptoms. What if the real conflict isn't with the other person, but with the unexamined stories we tell ourselves? The path to connection may not be about winning an argument, but about asking a gentler question.</p>
+                <div class="question-grid">
+                    <div class="question-card old">
+                        <h3>A Familiar Question</h3>
+                        <p>This question is focused on blame, defense, and control. It assumes the other person is an adversary to be managed or defeated.<br><br><em>"How can I prove I'm right and they are wrong?"</em></p>
+                    </div>
+                    <div class="question-card better">
+                        <h3>A Gentler Question</h3>
+                        <p>This question is focused on curiosity and vulnerability. It gently assumes our own internal story is the place to begin our inquiry.<br><br><em>"What's the story I'm telling myself right now?"</em></p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- NEW SECTION: LW CONNECTION -->
+            <div class="section">
+                <div class="lw-connection">
+                    <h3>The First Step: Learning to Be "Less Wrong"</h3>
+                    <p>This entire playbook is a practical exercise in what rationalist communities, like the one at <a href="https://www.lesswrong.com" target="_blank" rel="noopener noreferrer">Less Wrong</a>, call epistemic humility. It’s the foundational skill of questioning our own beliefs to become "less wrong" over time.</p>
+                    <p style="margin-top: 1rem;">This is a necessary baby step. But our ultimate goal is even more radical: to move from simply trying to be *less* wrong to actively finding joy and utility in the discovery of *how* we are wrong. The "Wrongness Reward System" is designed to help us make that leap—from intellectual exercise to a joyful, lived experience.</p>
+                    <p style="margin-top: 1.5rem; font-size: 0.9rem; color: #6c757d; font-style: italic;">(Disclaimer: This playbook is an independent interpretation of these ideas and is not affiliated with or endorsed by Less Wrong.)</p>
+                </div>
+            </div>
+
+
+            <!-- SECTION 5: THE SOLUTION -->
             <div class="failsafe">
-                <h2>The Solution: The Wrongness Reward System</h2>
+                <h2>A Path Forward: The Wrongness Reward System</h2>
                 <p class="intro-text" style="color: #2d3436;">What if being wrong became the badge of honor instead of the source of shame? This system flips the script on conflict, transforming a "Rightness War" into a collaborative game of discovery.</p>
-                <img src="web_images/collectivemindset.png" class="section-image" alt="Two people laughing while collaborating on a complex puzzle.">
                 <div class="kintsugi-quote">
                     "Welcome to the Kintsugi Conversation, where being wrong is not just expected—it's celebrated. Congratulations! You're human!"
                 </div>
-                <p>The goal is no longer to be right, but to get it wrong in more interesting ways than you did yesterday. The game begins when the argument stops.</p>
+                <p>The goal is no longer to be right, but to get it wrong in more interesting ways than we did yesterday. The game begins when the argument stops.</p>
                 <ul class="wrongness-points">
                     <li><strong>Points for:</strong> Catching yourself mid-assumption.</li>
                     <li><strong>Bonus points for:</strong> Admitting you don't know what they meant.</li>
@@ -481,60 +382,10 @@
         </div>
 
         <div class="cta">
-            <h2>You Are Already Wearing the Ruby Slippers.</h2>
-            <p>Connection isn't a destination. It's a practice. The power to shift a conversation from conflict to connection is always available. You just have to remember to click your heels.</p>
+            <h2>What If You're Already Wearing the Ruby Slippers?</h2>
+            <p>Connection isn't a destination; it's a practice. Perhaps the power to shift a conversation is always available, if we can just remember how to come home to ourselves.</p>
         </div>
     </div>
-    
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Interactive Quiz Logic
-            const quizOptions = document.querySelectorAll('.quiz-options button');
-            const quizResultDiv = document.getElementById('quiz-result');
-            
-            const results = {
-                hopeful: {
-                    title: "Your default seems to be the Hopeful Skeptic.",
-                    description: "You tend to assume good intentions and look for logical solutions. Your challenge is to remember that not all problems are simple data errors; sometimes emotions are the real issue.",
-                    color: "#20bf6b"
-                },
-                cynic: {
-                    title: "Your default seems to be the Straight-Up Cynic.",
-                    description: "You're adept at seeing potential threats and preparing for the worst. Your challenge is to consciously apply Hanlon's Razor—'Never attribute to malice that which is adequately explained by stupidity'—and see if a more charitable interpretation could also be true.",
-                    color: "#eb3b5a"
-                },
-                believer: {
-                    title: "Your default seems to be the Blissful Believer.",
-                    description: "Your optimism is a strength, but it can lead to avoiding necessary conflict. Your challenge is to find the courage to look at the difficult data without losing your fundamental hope.",
-                    color: "#45aaf2"
-                },
-                fatalist: {
-                    title: "Your default seems to be the Passive Fatalist.",
-                    description: "You're highly attuned to potential failure, which can feel like a self-fulfilling prophecy. Your challenge is to find a small, concrete action you can take, even when you believe it's hopeless, to generate new data.",
-                    color: "#a55eea"
-                }
-            };
-            
-            quizOptions.forEach(button => {
-                button.addEventListener('click', function() {
-                    const mindset = this.dataset.mindset;
-                    const result = results[mindset];
-                    
-                    quizResultDiv.innerHTML = `<h4>${result.title}</h4><p>${result.description}</p>`;
-                    quizResultDiv.style.display = 'block';
-                    quizResultDiv.style.backgroundColor = result.color + '20'; // Add transparency
-                    quizResultDiv.style.border = '1px solid ' + result.color;
-                });
-            });
-            
-            // Flip Card Logic
-            const tacticCards = document.querySelectorAll('.tactic-card');
-            tacticCards.forEach(card => {
-                card.addEventListener('click', function() {
-                    this.classList.toggle('is-flipped');
-                });
-            });
-        });
-    </script>
 </body>
 </html>
+
