@@ -43,7 +43,7 @@
             position: relative;
             padding: 5rem 2rem;
             background: linear-gradient(45deg, rgba(102, 126, 234, 0.85), rgba(118, 75, 162, 0.85)),
-                        url('https://placehold.co/1200x600/2c3e50/ffffff?text=Kintsugi');
+                        url('https://placehold.co/1200x600/333/fff?text=Kintsugi+Bowl');
             background-size: cover;
             background-position: center;
             text-align: center;
@@ -100,6 +100,13 @@
             padding: 2.5rem;
             border-radius: var(--border-radius);
             border: 2px solid #e9ecef;
+            min-height: 220px;
+        }
+        
+        .choice-card img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
         }
 
         .choice-card h3, .question-card h3 {
@@ -125,14 +132,14 @@
             color: var(--primary-color);
         }
 
-        .models-grid, .tactics-grid {
+        .models-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin-top: 2rem;
         }
 
-        .model-card, .tactic-card {
+        .model-card {
             background: var(--bg-light);
             padding: 2rem;
             border-radius: var(--border-radius);
@@ -140,12 +147,12 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .model-card:hover, .tactic-card:hover {
+        .model-card:hover {
            transform: translateY(-5px);
            box-shadow: 0 10px 25px rgba(0,0,0,0.07);
         }
 
-        .model-card h4, .tactic-card h4 {
+        .model-card h4 {
             font-size: 1.3rem;
             margin-bottom: 0.5rem;
         }
@@ -156,20 +163,92 @@
             margin-bottom: 1rem;
         }
         
-        .tactic-card .metaphor {
-            font-weight: 700;
-            font-style: italic;
-            margin-bottom: 1rem;
-        }
-        
         .model-hopeful { border-color: #20bf6b; }
         .model-cynic { border-color: #eb3b5a; }
         .model-believer { border-color: #45aaf2; }
         .model-fatalist { border-color: #a55eea; }
-        
-        .tactic-shutdown { border-color: #a55eea; } /* Fatalist */
-        .tactic-filibuster { border-color: #eb3b5a; } /* Cynic */
-        .tactic-redistricting { border-color: #eb3b5a; } /* Cynic */
+
+        /* Quiz styles */
+        .quiz-container {
+            background: var(--bg-light);
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            margin: 3rem 0;
+            border: 1px solid #dee2e6;
+        }
+        .quiz-container h3 { font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--primary-color); }
+        .quiz-question { margin-bottom: 1.5rem; }
+        .quiz-question p { font-weight: 600; margin-bottom: 1rem; }
+        .quiz-options button {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            background: white;
+            cursor: pointer;
+            transition: background-color 0.2s, border-color 0.2s;
+        }
+        .quiz-options button:hover { background: #f0f2f5; }
+        .quiz-options button.selected { background: var(--primary-color); color: white; border-color: var(--primary-color); }
+        #quiz-result {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            border-radius: 8px;
+            background: #e9ecef;
+            display: none; /* Initially hidden */
+        }
+        #quiz-result h4 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+
+        /* Tactic Flip Card Styles */
+        .tactics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            perspective: 1000px;
+        }
+        .tactic-card {
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+            cursor: pointer;
+            min-height: 250px;
+        }
+        .tactic-card.is-flipped { transform: rotateY(180deg); }
+        .tactic-front, .tactic-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            background: var(--bg-light);
+        }
+        .tactic-front { border-bottom: 4px solid #ccc; }
+        .tactic-back {
+            transform: rotateY(180deg);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .tactic-back h5 { font-size: 1.1rem; margin-bottom: 1rem; color: var(--primary-color); }
+        .tactic-shutdown .tactic-back { background: #f3e9ff; border: 2px solid var(--tactic-shutdown-color); }
+        .tactic-filibuster .tactic-back { background: #ffebee; border: 2px solid var(--tactic-filibuster-color); }
+        .tactic-redistricting .tactic-back { background: #ffebee; border: 2px solid var(--tactic-redistricting-color); }
+        .tactic-card h4 { font-size: 1.3rem; margin-bottom: 0.5rem; }
+        .tactic-card .metaphor { font-weight: 700; font-style: italic; margin-bottom: 1rem; }
+        :root {
+            --tactic-shutdown-color: #a55eea;
+            --tactic-filibuster-color: #eb3b5a;
+            --tactic-redistricting-color: #eb3b5a;
+        }
+        .tactic-shutdown .tactic-front { border-color: var(--tactic-shutdown-color); }
+        .tactic-filibuster .tactic-front { border-color: var(--tactic-filibuster-color); }
+        .tactic-redistricting .tactic-front { border-color: var(--tactic-redistricting-color); }
 
         .failsafe {
             background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
@@ -276,10 +355,12 @@
                 <p class="intro-text">Perhaps every difficult interaction begins with a subconscious choice about the nature of connection itself. Do we believe it's a long, arduous journey or something we can access right now? Gently noticing this belief might be the first step.</p>
                 <div class="choice-grid">
                     <div class="choice-card myth">
+                        <img src="https://placehold.co/400x200/ff6b6b/ffffff?text=Winding+Path" alt="A long, difficult, winding path.">
                         <h3>The Yellow Brick Road Myth</h3>
                         <p>The exhausting belief that connection is a faraway Oz. You think you must vanquish witches, win over wizards, and prove your worth just to get back home to a place of understanding.</p>
                     </div>
                     <div class="choice-card realization">
+                        <img src="https://placehold.co/400x200/667eea/ffffff?text=Ruby+Slippers" alt="Sparkling ruby slippers.">
                         <h3>The Ruby Slipper Realization</h3>
                         <p>The profound trust that the power to connect is simple, present, and always within you. You just need to remember to "click your heels"—to use a small, concrete action to come back to yourself.</p>
                     </div>
@@ -312,27 +393,65 @@
                         <p><strong>Principle:</strong> Assume the worst outcome is inevitable.<br><em>"Of course this is happening. We're doomed to repeat this forever."</em></p>
                     </div>
                 </div>
+                 <!-- Interactive Quiz -->
+                 <div class="quiz-container">
+                    <h3>A Gentle Self-Reflection Tool</h3>
+                    <p>If you're curious, this short reflection might help you notice which lens you tend to use when things get difficult. There are no right or wrong answers.</p>
+                    <div id="quiz">
+                        <div class="quiz-question">
+                            <p>1. When a difficult conversation starts, my first instinct is to...</p>
+                            <div class="quiz-options">
+                                <button data-score="hopeful">Look for a logical solution, assuming good intentions.</button>
+                                <button data-score="cynic">Prepare my defense, expecting to be misunderstood or attacked.</button>
+                                <button data-score="believer">Hope that if I stay positive, the problem will resolve itself.</button>
+                                <button data-score="fatalist">Brace for the worst, because these things usually go badly.</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="quiz-result">
+                        <h4>Your reflection suggests:</h4>
+                        <p id="quiz-result-text"></p>
+                    </div>
+                </div>
             </div>
 
             <!-- SECTION 3: THE POLITICAL TACTICS -->
             <div class="section">
                 <h2>The Tactics of Disconnection</h2>
-                <p class="intro-text">When our mental models feel threatened, we might deploy defensive tactics. These aren't just arguments; they can be strategic power plays that shut down productive dialogue. Simply noticing these patterns without judgment is often the first step to disarming them.</p>
+                <p class="intro-text">When our mental models feel threatened, we might deploy defensive tactics. These aren't just arguments; they can be strategic power plays that shut down productive dialogue. Simply noticing these patterns without judgment is often the first step to disarming them. (Click a card to see a gentle way to respond).</p>
                 <div class="tactics-grid">
                     <div class="tactic-card tactic-shutdown">
-                        <h4>The Shutdown</h4>
-                        <p class="metaphor">Tactic of the Passive Fatalist</p>
-                        <p>One partner withdraws and refuses to communicate, holding the relationship hostage until their terms (usually silence) are met. This avoids accountability and leaves the other powerless.</p>
+                        <div class="tactic-front">
+                            <h4>The Shutdown</h4>
+                            <p class="metaphor">Tactic of the Passive Fatalist</p>
+                            <p>One partner withdraws, holding the relationship hostage with silence. This avoids accountability and can leave the other feeling powerless.</p>
+                        </div>
+                        <div class="tactic-back">
+                           <h5>A gentle response:</h5>
+                           <p>"I'll take the points for being wrong first, but my story is that you're shutting down because you're overwhelmed. How wrong am I?"</p>
+                        </div>
                     </div>
                     <div class="tactic-card tactic-filibuster">
-                        <h4>The Filibuster</h4>
-                        <p class="metaphor">Tactic of the Straight-Up Cynic</p>
-                        <p>Dominating a conversation with lengthy, circular arguments to exhaust the other partner and prevent a resolution. Verbosity is used as a shield against listening or compromise.</p>
+                        <div class="tactic-front">
+                            <h4>The Filibuster</h4>
+                            <p class="metaphor">Tactic of the Straight-Up Cynic</p>
+                            <p>Dominating a conversation with endless arguments to exhaust the other partner. Verbosity is used as a shield against listening.</p>
+                        </div>
+                        <div class="tactic-back">
+                             <h5>A gentle response:</h5>
+                           <p>"I'm officially lost, so I get bonus points for admitting it! Can we pause so I can understand the one thing you most want me to hear?"</p>
+                        </div>
                     </div>
                     <div class="tactic-card tactic-redistricting">
-                        <h4>The Redistricting</h4>
-                        <p class="metaphor">Tactic of the Straight-Up Cynic</p>
-                        <p>Manipulating the boundaries of a disagreement to gain an advantage, like shifting goalposts or changing the rules. This leaves the other partner disoriented and unable to negotiate fairly.</p>
+                         <div class="tactic-front">
+                            <h4>The Redistricting</h4>
+                            <p class="metaphor">Tactic of the Straight-Up Cynic</p>
+                            <p>Manipulating the boundaries of a disagreement by shifting goalposts or changing the rules, leaving the other partner disoriented.</p>
+                        </div>
+                        <div class="tactic-back">
+                            <h5>A gentle response:</h5>
+                           <p>"I think we just changed topics! Let's give ourselves points for that, and see if we can go back to the original question for a moment."</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -386,6 +505,38 @@
             <p>Connection isn't a destination; it's a practice. Perhaps the power to shift a conversation is always available, if we can just remember how to come home to ourselves.</p>
         </div>
     </div>
+    <script>
+        // Tactic Card Flip
+        document.querySelectorAll('.tactic-card').forEach(card => {
+            card.addEventListener('click', () => {
+                card.classList.toggle('is-flipped');
+            });
+        });
+
+        // Simple Quiz Logic
+        const quizOptions = document.querySelectorAll('.quiz-options button');
+        const resultDiv = document.getElementById('quiz-result');
+        const resultText = document.getElementById('quiz-result-text');
+
+        const results = {
+            hopeful: "<strong>Your lens might be The Hopeful Skeptic.</strong> You tend to look for logical solutions and assume good intentions, which is a great foundation for problem-solving.",
+            cynic: "<strong>Your lens might be The Straight-Up Cynic.</strong> You tend to prepare for the worst and analyze situations for threats, which can be a protective instinct.",
+            believer: "<strong>Your lens might be The Blissful Believer.</strong> You tend to lean on optimism, hoping that positivity alone will resolve conflicts.",
+            fatalist: "<strong>Your lens might be The Passive Fatalist.</strong> You tend to feel that difficult situations are doomed to fail, which can be a response to past hurts."
+        };
+        
+        quizOptions.forEach(button => {
+            button.addEventListener('click', (e) => {
+                // Deselect other buttons
+                quizOptions.forEach(btn => btn.classList.remove('selected'));
+                // Select clicked button
+                e.target.classList.add('selected');
+                
+                const score = e.target.dataset.score;
+                resultText.innerHTML = results[score];
+                resultDiv.style.display = 'block';
+            });
+        });
+    </script>
 </body>
 </html>
-
