@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Stop the Spiral. Start the Conversation.</title>
+   <style>
+       * {
+           margin: 0;
+           padding: 0;
+           box-sizing: border-box;
+       }
+
+       body {
+           font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+           line-height: 1.6;
+           color: #333;
+           background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+           min-height: 100vh;
+       }
+
+       .container {
+           max-width: 1000px;
+           margin: 0 auto;
+           background: white;
+           box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+       }
+
+       .hero {
+           position: relative;
+           height: 400px;
+           background: linear-gradient(45deg, rgba(102, 126, 234, 0.8), rgba(118, 75, 162, 0.8)),
+                       url('https://placehold.co/1000x400/f0f2f5/e8f5e8?text=Connection');
+           background-size: cover;
+           background-position: center;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           text-align: center;
+           color: white;
+       }
+       
+       .hero::before {
+           content: '';
+           position: absolute;
+           top: 0;
+           left: 0;
+           right: 0;
+           bottom: 0;
+           background: rgba(0,0,0,0.2);
+       }
+
+       .hero-content {
+           position: relative;
+           z-index: 2;
+       }
+
+       .hero h1 {
+           font-size: 3.5rem;
+           font-weight: 700;
+           margin-bottom: 1rem;
+           text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+       }
+
+       .hero p {
+           font-size: 1.3rem;
+           margin-bottom: 2rem;
+           opacity: 0.95;
+           color: white;
+       }
+
+       .content {
+           padding: 4rem 3rem;
+       }
+
+       .section {
+           margin-bottom: 3rem;
+       }
+
+       .section h2 {
+           font-size: 2.2rem;
+           color: #2c3e50;
+           margin-bottom: 1.5rem;
+           border-left: 4px solid #667eea;
+           padding-left: 1rem;
+       }
+
+       .intro-text {
+           font-size: 1.2rem;
+           line-height: 1.8;
+           color: #555;
+           margin-bottom: 2rem;
+       }
+       
+       .callout {
+           border-left: 5px solid #ff6b6b;
+           padding-left: 1.5rem;
+           margin: 2.5rem 0;
+           font-size: 1.25rem;
+           font-style: italic;
+           color: #2d3436;
+       }
+
+       .benefits {
+           display: grid;
+           grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+           gap: 2rem;
+           margin: 2rem 0;
+       }
+
+       .benefit {
+           background: #f8f9fa;
+           padding: 2rem;
+           border-radius: 10px;
+           border-left: 4px solid #4ecdc4;
+           transition: transform 0.3s ease, box-shadow 0.3s ease;
+       }
+
+       .benefit:hover {
+           transform: translateY(-5px);
+           box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+       }
+
+       .benefit h4 {
+           font-size: 1.3rem;
+           color: #2c3e50;
+           margin-bottom: 0.5rem;
+       }
+
+       .protocol {
+           background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+           padding: 3rem;
+           border-radius: 15px;
+           margin: 3rem 0;
+       }
+
+       .phase {
+           background: white;
+           padding: 2rem;
+           border-radius: 10px;
+           margin: 1.5rem 0;
+           box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+       }
+
+       .phase h4 {
+           color: #667eea;
+           font-size: 1.4rem;
+           margin-bottom: 1rem;
+       }
+
+       .step {
+           margin: 1rem 0;
+           padding: 1rem;
+           background: #f8f9fa;
+           border-radius: 8px;
+           border-left: 3px solid #4ecdc4;
+       }
+
+       .step strong {
+           color: #2c3e50;
+       }
+
+       .failsafe {
+           background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
+           padding: 3rem;
+           border-radius: 15px;
+           margin: 3rem 0;
+           text-align: center;
+       }
+
+       .failsafe h3 {
+           color: #2d3436;
+           margin-bottom: 2rem;
+       }
+
+       .safe-words {
+           display: flex;
+           justify-content: center;
+           gap: 2rem;
+           flex-wrap: wrap;
+           margin: 2rem 0;
+       }
+
+       .safe-word {
+           background: rgba(255,255,255,0.9);
+           padding: 1rem 2rem;
+           border-radius: 25px;
+           font-size: 1.1rem;
+           font-weight: 600;
+           color: #2d3436;
+           box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+           transition: all 0.3s ease;
+       }
+
+       .safe-word:hover {
+           transform: scale(1.05);
+           box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+       }
+
+       .cta {
+           text-align: center;
+           padding: 4rem 2rem;
+           background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+           color: white;
+       }
+
+       .cta h2 {
+           font-size: 2.5rem;
+           margin-bottom: 1rem;
+           color: white;
+           border: none;
+           padding: 0;
+       }
+
+       .cta p {
+           font-size: 1.2rem;
+           opacity: 0.9;
+           color: white;
+       }
+       
+       .highlight {
+           background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
+           padding: 0.2rem 0.5rem;
+           border-radius: 5px;
+           font-weight: 600;
+       }
+
+       @media (max-width: 768px) {
+           .hero h1 {
+               font-size: 2.5rem;
+           }
+          
+           .hero p {
+               font-size: 1.1rem;
+           }
+          
+           .content {
+               padding: 2rem 1.5rem;
+           }
+          
+           .benefits {
+               grid-template-columns: 1fr;
+           }
+          
+           .safe-words {
+               flex-direction: column;
+               align-items: center;
+           }
+       }
+   </style>
+</head>
+<body>
+   <div class="container">
+       <div class="hero">
+           <div class="hero-content">
+               <h1>Stop the Spiral.<br>Start the Conversation.</h1>
+               <p>Transform conflict into connection with simple, practical tools.</p>
+           </div>
+       </div>
+
+       <div class="content">
+           <div class="section">
+               <p class="intro-text">
+                   You know the feeling. The shift in tone, the tightening in your chest. A simple discussion starts to curve downward into that same, old, painful argument. It feels inevitable, like a track you can't get off of. You brace for impact, knowing you'll both say things you regret, and the real issue will be lost in the noise.
+               </p>
+               <p class="intro-text">
+                   <strong>It really does not have to be this way.</strong>
+               </p>
+               <p class="intro-text">
+                   What if you had a circuit breaker? A simple, pre-installed system that could stop the emotional overload before it blows the fuse on your connection? This isn't about suppressing feelings or "winning" an argument. It's about creating enough space for the real conversation to happen. In moments of overwhelm, big gestures feel impossible. Connection begins with tiny, accessible actions.
+               </p>
+               <p class="callout">“What is the smallest thing I can do right now that moves me closer to connection?” — Let this question be your gentle guide in moments of tension.</p>
+
+           </div>
+
+           <div class="section">
+               <h2>What's In It For You?</h2>
+               <div class="benefits">
+                   <div class="benefit">
+                       <h4>🏆 Swap Regret for Respect</h4>
+                       <p>Instead of replaying hurtful words, feel the quiet pride of handling a tough moment with grace. You build self-respect and earn their respect in return.</p>
+                   </div>
+                   <div class="benefit">
+                       <h4>🎯 Solve the Real Problem</h4>
+                       <p>When you stop the emotional spiral, you can finally address the actual topic. The conversation becomes about the issue, not a battle of who is more hurt.</p>
+                   </div>
+                   <div class="benefit">
+                       <h4>🎮 Reclaim Your Control</h4>
+                       <p>Move from being a passenger in an emotional hijack to the pilot of your own response. This feeling of agency is empowering and reduces helplessness.</p>
+                   </div>
+                   <div class="benefit">
+                       <h4>🏛️ Build a Library of Trust</h4>
+                       <p>Every time you navigate a trigger together, you make a deposit in your shared bank of trust. The relationship starts to feel safer and more resilient.</p>
+                   </div>
+                   <div class="benefit">
+                       <h4>⚡ Get Your Time and Energy Back</h4>
+                       <p>Arguments are exhausting. Pausing is an investment that pays you back with more time and energy for the good stuff.</p>
+                   </div>
+               </div>
+           </div>
+           
+           <div class="section">
+               <h2>How It Works: The Tactical Pause Protocol</h2>
+               <p class="intro-text">This isn't complicated. It's a sequence of simple, deliberate actions to take the moment you feel a trigger. This method respects that everyone’s nervous system reacts differently, especially when trauma is involved. It meets you where you are.</p>
+              
+               <div class="protocol">
+                   <div class="phase">
+                       <h4>Phase 1: The Internal Circuit Breaker (The First 3 Seconds)</h4>
+                       <div class="step">
+                           <strong>Find an Anchor Point:</strong> Press your feet into the floor. Feel the texture of your shirt. Focus on a physical sensation to pull your brain out of the abstract conflict and into the present.
+                       </div>
+                       <div class="step">
+                           <strong>Use the 4-Count Breath:</strong> Inhale slowly for 4, hold for 4, exhale for 4. This is a physiological reset button for your nervous system and creates space between instinct and reaction.
+                       </div>
+                       <div class="step">
+                           <strong>Run a Silent Mantra:</strong> Repeat a phrase in your head: "This is data, not a judgment," or "My goal is connection." This helps soften internal narratives.
+                       </div>
+                   </div>
+
+                   <div class="phase">
+                       <h4>Phase 2: The Physical Disengagement (The Next 10 Seconds)</h4>
+                       <div class="step">
+                           <strong>The Hydration Reset:</strong> Reach for and take a slow sip of water. It's a universally understood reason to pause speaking for a few seconds.
+                       </div>
+                       <div class="step">
+                           <strong>The Posture Shift:</strong> Consciously change your position. If you're leaning forward, sit back. Uncross your arms. This signals to your body a shift away from a defensive posture.
+                       </div>
+                       <div class="step">
+                           <strong>The Note-Taker's Pause:</strong> Pick up a pen. Signal that you are preparing to thoughtfully consider what was said. The act of preparing to write engages a different part of your brain.
+                       </div>
+                   </div>
+               </div>
+           </div>
+
+           <div class="failsafe">
+               <h3>The Ultimate Upgrade: Creating Shared Safety</h3>
+               <p>This is a shared trigger management approach for when you're ready to treat miscommunication as a shared problem, not a personal failing. It's about rebuilding trust one small pause at a time.</p>
+              
+               <p><strong>Here's the plan:</strong> Together, agree on a safe word or phrase. But here's the key: <span class="highlight">it has to be slightly ridiculous.</span></p>
+              
+               <p>Not "we need to pause," but something like:</p>
+              
+               <div class="safe-words">
+                   <div class="safe-word">"The flamingo is on the roof."</div>
+                   <div class="safe-word">"Activate potato mode."</div>
+                   <div class="safe-word">"Marmalade."</div>
+               </div>
+              
+               <p><strong>Why it works:</strong> The absurdity instantly breaks the tension. It serves as a private joke that reminds you both: "Ah, we're doing that thing again. We're on the same team, and this fight is the opponent."</p>
+              
+               <p style="margin-top: 2rem; font-size: 1.2rem; font-weight: 600;">If you can get to a place where the trigger itself makes you both laugh, you've already won.</p>
+           </div>
+       </div>
+
+       <div class="cta">
+           <h2>Ready to Stop the Spiral?</h2>
+           <p>You don’t need to master complex communication to connect deeply. Connection often starts with just <span class="highlight" style="background: rgba(255,255,255,0.2); color: white;">one small action.</span></p>
+           <div style="margin-top: 2rem; padding: 2rem; background: rgba(255,255,255,0.1); border-radius: 15px;">
+                <p style="font-size: 1.1rem;">Next time overwhelm strikes, remember: <strong>try the smallest thing that just might get you closer to connection.</strong></p>
+               <p style="font-size: 1.1rem; margin-top: 1rem;"><em>What if right now was the start of a new way to connect, no matter what had come before?</em></p>
+           </div>
+       </div>
+   </div>
+</body>
+</html>
