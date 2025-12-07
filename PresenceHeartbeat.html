@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Presence — Heartbeat</title>
+<style>
+  :root{
+    --bg:#0b0f14;
+    --grid:#0f1720;
+    --accent:#7ee3c7;
+    --muted:#9aa6b2;
+  }
+  html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;}
+  body{background:linear-gradient(180deg,var(--bg),#071018);display:flex;align-items:center;justify-content:center;color:var(--muted);}
+  .panel{width:min(920px,92vw);padding:36px;border-radius:16px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:0 8px 30px rgba(2,6,23,0.6);}
+  h1{margin:0 0 12px 0;font-size:20px;color:#dff7ee;font-weight:600;letter-spacing:0.2px;}
+  p.lead{margin:0 0 20px 0;color:var(--muted);line-height:1.5;}
+  .monitor{position:relative;height:220px;border-radius:10px;background:
+    repeating-linear-gradient(180deg, rgba(255,255,255,0.007) 0 1px, transparent 1px 24px),
+    linear-gradient(90deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+    overflow:hidden;padding:18px;display:flex;align-items:center;}
+  svg{width:100%;height:100%;}
+  .heartbeat path{stroke:var(--accent);stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 2px 8px rgba(0,0,0,0.6))}
+  /* animation: shift the dashoffset to create the pulse traveling leftwards */
+  .heartbeat path {
+    stroke-dasharray: 1200;
+    stroke-dashoffset: 1200;
+    animation: draw 3s linear infinite;
+  }
+  @keyframes draw {
+    0% { stroke-dashoffset: 1200; opacity:1; }
+    10% { stroke-dashoffset: 900; opacity:1; }
+    25% { stroke-dashoffset: 700; opacity:1; }
+    40% { stroke-dashoffset: 500; opacity:1; }
+    60% { stroke-dashoffset: 300; opacity:1; }
+    80% { stroke-dashoffset: 100; opacity:1; }
+    100% { stroke-dashoffset: 0; opacity:1; }
+  }
+  .caption{margin-top:14px;color:var(--muted);font-size:13px;display:flex;gap:12px;align-items:center;}
+  .dot{width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 6px 20px rgba(126,227,199,0.12)}
+  @media (max-width:640px){
+    .monitor{height:160px;padding:12px}
+    h1{font-size:18px}
+  }
+</style>
+</head>
+<body>
+  <div class="panel" role="region" aria-label="Presence heartbeat visualization">
+    <div style="flex:1">
+      <h1>Presence as a Heartbeat</h1>
+      <p class="lead">When the world measures worth by spikes, remember: a steady heartbeat is the signal of a living, attuned system. You are in high availability.</p>
+      <div class="monitor" aria-hidden="true">
+        <svg viewBox="0 0 1000 200" preserveAspectRatio="none" class="heartbeat">
+          <!-- Background grid line -->
+          <path d="M0 120 H1000" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+          <!-- steady heartbeat path: small consistent pulses -->
+          <path d="M0 120 
+            L80 120
+            L90 120
+            L95 95
+            L110 140
+            L130 120
+            L210 120
+            L220 120
+            L225 95
+            L240 140
+            L260 120
+            L340 120
+            L350 120
+            L355 95
+            L370 140
+            L390 120
+            L470 120
+            L480 120
+            L485 95
+            L500 140
+            L520 120
+            L600 120
+            L1000 120" />
+        </svg>
+      </div>
+      <div class="caption"><div class="dot" aria-hidden="true"></div><div>Steady. Ready. Listening.</div></div>
+    </div>
+  </div>
+</body>
+</html>
