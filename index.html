@@ -1,9 +1,159 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Presentation</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Index</title>
+    <style>
+        :root {
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --accent-color: #4a90e2;
+            --hover-bg: #f0f4f8;
+            --border-color: #e1e4e8;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        h1 {
+            font-weight: 300;
+            margin-top: 0;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+
+        /* Search Bar */
+        #search-input {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 25px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 16px;
+            box-sizing: border-box; /* Ensures padding doesn't affect width */
+            transition: border-color 0.2s;
+        }
+
+        #search-input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+
+        /* File List */
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        li:last-child {
+            border-bottom: none;
+        }
+
+        a {
+            display: block;
+            text-decoration: none;
+            color: var(--text-color);
+            padding: 15px 10px;
+            transition: background-color 0.2s, color 0.2s;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        a:hover {
+            background-color: var(--hover-bg);
+            color: var(--accent-color);
+        }
+
+        .file-type {
+            font-size: 0.8em;
+            color: #888;
+            background: #eee;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
 </head>
 <body>
-    <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vSd9QgwqO1P9-xfDSLst8MOao8hpeUOMKGmYSYTRgyH-dH7a92O0l42_6FqcxWPN47PR5tWoUNR6Uk5/pubembed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+
+<div class="container">
+    <h1>Project Directory</h1>
+    
+    <input type="text" id="search-input" placeholder="Search for files..." onkeyup="filterList()">
+
+    <ul id="file-list">
+        <li><a href="12 Myths & Misconceptions About Positive Psychology.html">12 Myths & Misconceptions About Positive Psychology <span class="file-type">HTML</span></a></li>
+        <li><a href="aninvitationtous.html">aninvitationtous <span class="file-type">HTML</span></a></li>
+        <li><a href="broadcast.html">broadcast <span class="file-type">HTML</span></a></li>
+        <li><a href="BuildingaGenerativeFuture.html">BuildingaGenerativeFuture <span class="file-type">HTML</span></a></li>
+        <li><a href="communication-flow-page.html">communication-flow-page <span class="file-type">HTML</span></a></li>
+        <li><a href="DynamicsAndNeeds.html">DynamicsAndNeeds <span class="file-type">HTML</span></a></li>
+        <li><a href="FullBloom.html">FullBloom <span class="file-type">HTML</span></a></li>
+        <li><a href="gallery.html">gallery <span class="file-type">HTML</span></a></li>
+        <li><a href="generative-orchard.html">generative-orchard <span class="file-type">HTML</span></a></li>
+        <li><a href="Grandtheory.html">Grandtheory <span class="file-type">HTML</span></a></li>
+        <li><a href="How to Use The Coping Wheel (+ 5 More Coping Strategies).html">How to Use The Coping Wheel (+ 5 More Coping Strategies) <span class="file-type">HTML</span></a></li>
+        <li><a href="intothelight.html">intothelight <span class="file-type">HTML</span></a></li>
+        <li><a href="JuvenalMeetsNewWorld.jpg">JuvenalMeetsNewWorld <span class="file-type">JPG</span></a></li>
+        <li><a href="phase4_video.html">phase4_video <span class="file-type">HTML</span></a></li>
+        <li><a href="practicalandempathetic.html">practicalandempathetic <span class="file-type">HTML</span></a></li>
+        <li><a href="PragerPathAnInteractiveExploration.html">PragerPathAnInteractiveExploration <span class="file-type">HTML</span></a></li>
+        <li><a href="PresenceHeartbeat.html">PresenceHeartbeat <span class="file-type">HTML</span></a></li>
+        <li><a href="relationship_threading_experience.html">relationship_threading_experience <span class="file-type">HTML</span></a></li>
+        <li><a href="spinningworld.html">spinningworld <span class="file-type">HTML</span></a></li>
+        <li><a href="The Learning Trap Theory.html">The Learning Trap Theory <span class="file-type">HTML</span></a></li>
+        <li><a href="TheAllThingsConsideredGameOfLife.html">TheAllThingsConsideredGameOfLife <span class="file-type">HTML</span></a></li>
+        <li><a href="Thearbitrarydefault.html">Thearbitrarydefault <span class="file-type">HTML</span></a></li>
+    </ul>
+</div>
+
+<script>
+    function filterList() {
+        var input, filter, ul, li, a, i, txtValue;
+        input = document.getElementById('search-input');
+        filter = input.value.toUpperCase();
+        ul = document.getElementById("file-list");
+        li = ul.getElementsByTagName('li');
+
+        for (i = 0; i < li.length; i++) {
+            a = li[i].getElementsByTagName("a")[0];
+            txtValue = a.textContent || a.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                li[i].classList.remove("hidden");
+            } else {
+                li[i].classList.add("hidden");
+            }
+        }
+    }
+</script>
+
 </body>
 </html>
