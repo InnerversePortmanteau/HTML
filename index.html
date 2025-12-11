@@ -3,157 +3,243 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Index</title>
+    <title>The InnerVerse: Weaving the Main Thread</title>
     <style>
         :root {
-            --bg-color: #f8f9fa;
+            --bg-color: #fdfbf7;
+            --text-color: #2c3e50;
+            --accent-color: #e67e22; /* Warm orange for energy/play */
+            --thread-color: #3498db; /* Blue for the calm main thread */
             --card-bg: #ffffff;
-            --text-color: #333333;
-            --accent-color: #4a90e2;
-            --hover-bg: #f0f4f8;
-            --border-color: #e1e4e8;
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: var(--font-main);
             background-color: var(--bg-color);
             color: var(--text-color);
             line-height: 1.6;
             margin: 0;
-            padding: 40px 20px;
+            padding: 0;
+            overflow-x: hidden;
         }
 
-        .container {
+        /* The Main Thread Animation */
+        .thread-line {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            width: 2px;
+            height: 100vh;
+            background: linear-gradient(to bottom, transparent, var(--thread-color), transparent);
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        header {
+            text-align: center;
+            padding: 4rem 2rem;
             max-width: 800px;
             margin: 0 auto;
-            background: var(--card-bg);
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
 
         h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
             font-weight: 300;
-            margin-top: 0;
-            border-bottom: 2px solid var(--accent-color);
-            padding-bottom: 15px;
-            margin-bottom: 30px;
+            letter-spacing: 2px;
         }
 
-        /* Search Bar */
-        #search-input {
-            width: 100%;
-            padding: 12px 15px;
-            margin-bottom: 25px;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            font-size: 16px;
-            box-sizing: border-box; /* Ensures padding doesn't affect width */
-            transition: border-color 0.2s;
+        .subtitle {
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            font-style: italic;
+            margin-bottom: 2rem;
         }
 
-        #search-input:focus {
-            outline: none;
-            border-color: var(--accent-color);
+        .intro-text {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 3rem auto;
         }
 
-        /* File List */
-        ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
+        /* Navigation Grid */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem 2rem;
         }
 
-        li {
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        li:last-child {
-            border-bottom: none;
-        }
-
-        a {
-            display: block;
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             text-decoration: none;
-            color: var(--text-color);
-            padding: 15px 10px;
-            transition: background-color 0.2s, color 0.2s;
-            border-radius: 6px;
+            color: inherit;
+            border-left: 4px solid transparent;
             display: flex;
+            flex-direction: column;
             justify-content: space-between;
-            align-items: center;
         }
 
-        a:hover {
-            background-color: var(--hover-bg);
-            color: var(--accent-color);
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
         }
 
-        .file-type {
-            font-size: 0.8em;
+        /* Specific Card Themes based on functionality */
+        .card.awareness { border-left-color: #9b59b6; } /* Purple for consciousness */
+        .card.connection { border-left-color: #e74c3c; } /* Red for heart/relationship */
+        .card.play { border-left-color: #f1c40f; } /* Yellow for game/play */
+        .card.system { border-left-color: #2ecc71; } /* Green for growth/structure */
+
+        .card h2 {
+            font-size: 1.5rem;
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: #555;
+            flex-grow: 1;
+        }
+
+        .card .tag {
+            display: inline-block;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            color: #aaa;
+            font-weight: bold;
+        }
+
+        .cta-arrow {
+            margin-top: 1rem;
+            font-weight: bold;
+            color: var(--thread-color);
+            text-align: right;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: #fff;
+            border-top: 1px solid #eee;
+            font-size: 0.9rem;
             color: #888;
-            background: #eee;
-            padding: 2px 8px;
-            border-radius: 4px;
         }
 
-        .hidden {
-            display: none;
+        /* Heart Pulse Animation */
+        .heart {
+            display: inline-block;
+            color: #e74c3c;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            .grid-container { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>Project Directory</h1>
-    
-    <input type="text" id="search-input" placeholder="Search for files..." onkeyup="filterList()">
+    <div class="thread-line"></div>
 
-    <ul id="file-list">
-        <li><a href="12 Myths & Misconceptions About Positive Psychology.html">12 Myths & Misconceptions About Positive Psychology <span class="file-type">HTML</span></a></li>
-        <li><a href="aninvitationtous.html">aninvitationtous <span class="file-type">HTML</span></a></li>
-        <li><a href="broadcast.html">broadcast <span class="file-type">HTML</span></a></li>
-        <li><a href="BuildingaGenerativeFuture.html">BuildingaGenerativeFuture <span class="file-type">HTML</span></a></li>
-        <li><a href="communication-flow-page.html">communication-flow-page <span class="file-type">HTML</span></a></li>
-        <li><a href="DynamicsAndNeeds.html">DynamicsAndNeeds <span class="file-type">HTML</span></a></li>
-        <li><a href="FullBloom.html">FullBloom <span class="file-type">HTML</span></a></li>
-        <li><a href="gallery.html">gallery <span class="file-type">HTML</span></a></li>
-        <li><a href="generative-orchard.html">generative-orchard <span class="file-type">HTML</span></a></li>
-        <li><a href="Grandtheory.html">Grandtheory <span class="file-type">HTML</span></a></li>
-        <li><a href="How to Use The Coping Wheel (+ 5 More Coping Strategies).html">How to Use The Coping Wheel (+ 5 More Coping Strategies) <span class="file-type">HTML</span></a></li>
-        <li><a href="intothelight.html">intothelight <span class="file-type">HTML</span></a></li>
-        <li><a href="JuvenalMeetsNewWorld.jpg">JuvenalMeetsNewWorld <span class="file-type">JPG</span></a></li>
-        <li><a href="phase4_video.html">phase4_video <span class="file-type">HTML</span></a></li>
-        <li><a href="practicalandempathetic.html">practicalandempathetic <span class="file-type">HTML</span></a></li>
-        <li><a href="PragerPathAnInteractiveExploration.html">PragerPathAnInteractiveExploration <span class="file-type">HTML</span></a></li>
-        <li><a href="PresenceHeartbeat.html">PresenceHeartbeat <span class="file-type">HTML</span></a></li>
-        <li><a href="relationship_threading_experience.html">relationship_threading_experience <span class="file-type">HTML</span></a></li>
-        <li><a href="spinningworld.html">spinningworld <span class="file-type">HTML</span></a></li>
-        <li><a href="The Learning Trap Theory.html">The Learning Trap Theory <span class="file-type">HTML</span></a></li>
-        <li><a href="TheAllThingsConsideredGameOfLife.html">TheAllThingsConsideredGameOfLife <span class="file-type">HTML</span></a></li>
-        <li><a href="Thearbitrarydefault.html">Thearbitrarydefault <span class="file-type">HTML</span></a></li>
-    </ul>
-</div>
+    <header>
+        <h1>THE INNERVERSE</h1>
+        <div class="subtitle">Weaving the Main Thread</div>
+        <p class="intro-text">
+            Your "Main Thread" is that quiet, centered voice within you. It speaks from love rather than fear. 
+            It is the part of you that remains calm in storms, curious in conflict, and open in vulnerability.
+            <br><br>
+            <strong>Where would you like to strengthen the thread today?</strong>
+        </p>
+    </header>
 
-<script>
-    function filterList() {
-        var input, filter, ul, li, a, i, txtValue;
-        input = document.getElementById('search-input');
-        filter = input.value.toUpperCase();
-        ul = document.getElementById("file-list");
-        li = ul.getElementsByTagName('li');
+    <main class="grid-container">
 
-        for (i = 0; i < li.length; i++) {
-            a = li[i].getElementsByTagName("a")[0];
-            txtValue = a.textContent || a.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                li[i].classList.remove("hidden");
-            } else {
-                li[i].classList.add("hidden");
-            }
-        }
-    }
-</script>
+        <a href="https://innerverseportmanteau.github.io/HTML/Thearbitrarydefault.html" class="card awareness">
+            <span class="tag">The Awareness</span>
+            <h2>The Arbitrary Default</h2>
+            <p>
+                Before we can choose the "Main Thread," we must see the thread we are currently on. 
+                Explore how unseen defaults shape your reality and learn to pause before you react.
+            </p>
+            <div class="cta-arrow">Audit Your Defaults &rarr;</div>
+        </a>
+
+        <a href="https://innerverseportmanteau.github.io/HTML/relationship_threading_experience.html" class="card connection">
+            <span class="tag">The Connection</span>
+            <h2>Relationship Threading</h2>
+            <p>
+                Authentic connection begins here. A guided experience to move from "Me vs. You" 
+                to a shared tapestry of understanding. Use this when the knot feels too tight to untie alone.
+            </p>
+            <div class="cta-arrow">Start Threading &rarr;</div>
+        </a>
+
+        <a href="https://innerverseportmanteau.github.io/HTML/PragerPathAnInteractiveExploration.html" class="card system">
+            <span class="tag">The Framework</span>
+            <h2>The Prager Path</h2>
+            <p>
+                An interactive exploration of the values that guide us. 
+                When the storm hits, this is your compass. Align your actions with your deeper principles.
+            </p>
+            <div class="cta-arrow">Walk the Path &rarr;</div>
+        </a>
+
+        <a href="https://innerverseportmanteau.github.io/HTML/TheAllThingsConsideredGameOfLife.html" class="card play">
+            <span class="tag">The Play</span>
+            <h2>The Game of Life</h2>
+            <p>
+                Transformation doesn't have to be heavy. It takes 400 reps to learn by rote, 
+                but only 20 reps through play. Enter the "Game" to rewrite your habits with joy.
+            </p>
+            <div class="cta-arrow">Play the Game &rarr;</div>
+        </a>
+
+        <a href="https://innerverseportmanteau.github.io/HTML/PresenceHeartbeat.html" class="card awareness">
+            <span class="tag">The Pulse</span>
+            <h2>Presence Heartbeat</h2>
+            <p>
+                The foundation of the Main Thread. Return to the present moment. 
+                Use this simple tool to find the signal amidst the noise.
+            </p>
+            <div class="cta-arrow">Find Center &rarr;</div>
+        </a>
+
+        <a href="https://innerverseportmanteau.github.io/HTML/The%20Learning%20Trap%20Theory.html" class="card system">
+            <span class="tag">The Theory</span>
+            <h2>The Learning Trap</h2>
+            <p>
+                Why do we get stuck? Understand the psychology of fear and the mechanism 
+                that keeps us from learning. Deconstruct the trap to set yourself free.
+            </p>
+            <div class="cta-arrow">Unlock the Trap &rarr;</div>
+        </a>
+
+    </main>
+
+    <footer>
+        <p>
+            This portal is a living system. Listen to the quiet voice. <span class="heart">💝</span><br>
+            <a href="https://innerverseportmanteau.github.io/HTML/" style="color: #999; text-decoration: none;">View Full Archive</a>
+        </p>
+    </footer>
 
 </body>
 </html>
