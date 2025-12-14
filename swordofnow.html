@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Sword of Now</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%);
+            color: #e0e0e0;
+            font-family: 'Georgia', serif;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            min-height: 100vh;
+        }
+        
+        .breath {
+            text-align: center;
+            margin-bottom: 4rem;
+            opacity: 0;
+            animation: fadeIn 3s ease-in forwards;
+        }
+        
+        .breath-circle {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 2rem;
+            border: 2px solid rgba(200, 200, 200, 0.3);
+            border-radius: 50%;
+            animation: breathe 4s ease-in-out infinite;
+        }
+        
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.2); opacity: 0.6; }
+        }
+        
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        
+        .title {
+            font-size: 2.5rem;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+            color: #c8c8c8;
+        }
+        
+        .subtitle {
+            font-size: 1rem;
+            font-style: italic;
+            color: #888;
+            letter-spacing: 0.05em;
+        }
+        
+        .section {
+            margin: 4rem 0;
+            opacity: 0;
+            animation: fadeIn 2s ease-in forwards;
+        }
+        
+        .section:nth-child(2) { animation-delay: 0.5s; }
+        .section:nth-child(3) { animation-delay: 1s; }
+        .section:nth-child(4) { animation-delay: 1.5s; }
+        .section:nth-child(5) { animation-delay: 2s; }
+        .section:nth-child(6) { animation-delay: 2.5s; }
+        
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: #b8b8b8;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+        }
+        
+        .text {
+            font-size: 1.1rem;
+            color: #d0d0d0;
+            margin-bottom: 1.5rem;
+        }
+        
+        .emphasis {
+            color: #e8e8e8;
+            font-style: italic;
+        }
+        
+        .cut {
+            display: inline-block;
+            color: #999;
+            font-size: 1.5rem;
+            margin: 0 0.5rem;
+            opacity: 0.6;
+        }
+        
+        .practice {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 3px solid rgba(200, 200, 200, 0.3);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .practice-item {
+            margin: 1.5rem 0;
+        }
+        
+        .practice-title {
+            font-size: 1.2rem;
+            color: #c8c8c8;
+            margin-bottom: 0.5rem;
+        }
+        
+        .practice-text {
+            font-size: 1rem;
+            color: #a8a8a8;
+            font-style: italic;
+        }
+        
+        .closing {
+            text-align: center;
+            margin-top: 5rem;
+            padding: 3rem 0;
+            border-top: 1px solid rgba(200, 200, 200, 0.1);
+        }
+        
+        .closing-text {
+            font-size: 1.3rem;
+            color: #b8b8b8;
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+        
+        .final {
+            font-size: 1rem;
+            color: #888;
+            letter-spacing: 0.1em;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 2rem 1rem;
+            }
+            
+            .title {
+                font-size: 2rem;
+            }
+            
+            .text {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="breath">
+            <div class="breath-circle"></div>
+            <h1 class="title">The Sword of Now</h1>
+            <p class="subtitle">Where the Ronin and the Mystic Meet</p>
+        </div>
+        
+        <div class="section">
+            <p class="text">
+                The connection between Eckhart Tolle and The Ronin is not just close—<span class="emphasis">it is identical</span>. 
+                They are two different languages for the exact same state of mind.
+            </p>
+            <p class="text">
+                You are realizing that all the stories—The Black Knight, The Snooker Table, The Victim—are just movies playing in your head.
+            </p>
+            <p class="text">
+                The only reality is: <span class="emphasis">You are sitting in a room. You are breathing. The dog is there.</span>
+            </p>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">The Sword is "The Now"</h2>
+            <p class="text">
+                In swordsmanship, if you think about the last move you missed, you die. If you worry about the next move, you die.
+            </p>
+            <p class="text">
+                You must be <span class="emphasis">Mushin</span> (No Mind). You must be completely in the Now.
+            </p>
+            <p class="text">
+                Eckhart Tolle says the same:
+            </p>
+            <p class="text" style="padding-left: 2rem;">
+                The Past = Depression (The Story of what went wrong)<br>
+                The Future = Anxiety (The Story of what might go wrong)<br>
+                <span class="emphasis">The Now = Peace</span>
+            </p>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">Using the Sword</h2>
+            <p class="text">
+                The Ronin carries a sword to cut the enemy. You can use the Sword of Now to cut the Story:
+            </p>
+            <p class="text" style="padding-left: 2rem;">
+                Thought: "I am snookered" <span class="cut">⚔</span> Reality: "I am sitting in a chair"
+            </p>
+            <p class="text" style="padding-left: 2rem;">
+                Thought: "My wife is the Dragon" <span class="cut">⚔</span> Reality: "The room is quiet"
+            </p>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">The Pain-Body is the Barking Dog</h2>
+            <p class="text">
+                Tolle speaks of the Pain-Body—an accumulated field of old emotional pain that wants to feed on more pain. 
+                It wants you to argue. It wants you to feel like a victim.
+            </p>
+            <p class="text">
+                This is the part of you that keeps barking because it's used to the leash.
+            </p>
+            <p class="text">
+                The Ronin doesn't fight the Pain-Body. He just watches it.
+            </p>
+            <p class="text">
+                He observes: <span class="emphasis">"Ah, there is the feeling of sadness. Okay."</span>
+            </p>
+            <p class="text">
+                He doesn't become it. He doesn't say "I am sad." He says <span class="emphasis">"There is sadness here."</span>
+            </p>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">The Ultimate Freedom</h2>
+            <p class="text">
+                The only moment is now. And that is the best story because it is the only one you can edit.
+            </p>
+            <p class="text">
+                You cannot edit the "Childhood" story. The ink is dry.
+            </p>
+            <p class="text">
+                You cannot edit the "Father in England" story yet. The book is closed.
+            </p>
+            <p class="text">
+                But the Now story? <span class="emphasis">You are writing it every second.</span>
+            </p>
+        </div>
+        
+        <div class="practice">
+            <div class="practice-item">
+                <div class="practice-title">Drop the Rock</div>
+                <div class="practice-text">Just for tonight, put the boulder down. Gravity will hold it.</div>
+            </div>
+            
+            <div class="practice-item">
+                <div class="practice-title">Sheath the Sword</div>
+                <div class="practice-text">There is no enemy in the room right now.</div>
+            </div>
+            
+            <div class="practice-item">
+                <div class="practice-title">Be with the Dog</div>
+                <div class="practice-text">Look at Humphrey. He is the Zen Master. He isn't worrying about the rent or the smirks. He is just Being. Join him there.</div>
+            </div>
+        </div>
+        
+        <div class="closing">
+            <p class="closing-text">The "GSD Protocol" is for tomorrow.</p>
+            <p class="closing-text">The "Now" is for you.</p>
+            <p class="final">YOU ARE HERE</p>
+        </div>
+    </div>
+</body>
+</html>
