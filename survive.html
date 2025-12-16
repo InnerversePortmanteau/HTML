@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survival Mode</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            min-height: 100vh;
+            background: linear-gradient(to bottom, #050505 0%, #0a0a12 100%);
+            color: #888;
+            font-family: 'Courier New', Courier, monospace; /* Changed to monospace like raw data */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            transition: background 5s ease;
+        }
+        
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0;
+            animation: twinkle 6s infinite;
+        }
+        
+        .container {
+            max-width: 600px;
+            text-align: center;
+            z-index: 10;
+            padding: 20px;
+        }
+        
+        /* The main message is static and solid */
+        .core-message {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #e0e0e0;
+            margin-bottom: 4rem;
+            opacity: 0;
+            animation: deepFadeIn 4s ease-in forwards;
+        }
+
+        /* The anchors replace the questions. They are transient. */
+        .anchor-text {
+            height: 60px;
+            color: #5c6b7f;
+            font-style: italic;
+            font-size: 0.9rem;
+            transition: opacity 2s ease;
+            opacity: 0;
+        }
+        
+        /* The Survival Button */
+        .lifeline {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 1px solid #333;
+            background: transparent;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 2rem;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .lifeline::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #4a5568;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .lifeline:active {
+            transform: scale(0.95);
+            border-color: #5c6b7f;
+        }
+
+        .lifeline:active::after {
+            background: #a8b2d1;
+            box-shadow: 0 0 20px #a8b2d1;
+        }
+
+        /* Breathing animation when holding */
+        .breathing .lifeline {
+            animation: breathCycle 8s infinite ease-in-out;
+            border-color: #4a5568;
+        }
+
+        @keyframes breathCycle {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.3); opacity: 1; }
+        }
+
+        @keyframes deepFadeIn {
+            to { opacity: 1; }
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 0.4; }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    
+    <div class="container">
+        <div class="core-message">
+            The hurt is perfect data.<br>
+            It means the system is still online.<br>
+            Sit with the glitch.
+        </div>
+        
+        <div class="anchor-text" id="anchor"></div>
+
+        <div class="lifeline" id="lifeline"></div>
+    </div>
+
+    <script>
+        // Star generation
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 150; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 5 + 's';
+            starsContainer.appendChild(star);
+        }
+
+        // The Survival Anchors - No questions, just statements.
+        const anchors = [
+            "No receipts required here.",
+            "You don't have to fix it.",
+            "The Western Dragon cannot see you.",
+            "Survival is enough.",
+            "60% wrong is 100% human.",
+            "Just data.",
+            "Still here."
+        ];
+
+        const anchorDisplay = document.getElementById('anchor');
+        let index = 0;
+
+        function cycleAnchors() {
+            // Fade out
+            anchorDisplay.style.opacity = 0;
+            
+            setTimeout(() => {
+                // Change text
+                anchorDisplay.textContent = anchors[index];
+                // Fade in
+                anchorDisplay.style.opacity = 1;
+                
+                index = (index + 1) % anchors.length;
+            }, 2000); // Wait for fade out
+        }
+
+        // Cycle anchors slowly (every 8 seconds)
+        setInterval(cycleAnchors, 8000);
+        cycleAnchors(); // Start immediately
+
+        // The Lifeline Interaction
+        const lifeline = document.getElementById('lifeline');
+        const body = document.body;
+
+        // When user holds the button (survival mode)
+        const startBreath = () => {
+            body.classList.add('breathing');
+            lifeline.style.borderColor = '#fff';
+        };
+
+        const endBreath = () => {
+            body.classList.remove('breathing');
+            lifeline.style.borderColor = '#333';
+        };
+
+        lifeline.addEventListener('mousedown', startBreath);
+        lifeline.addEventListener('mouseup', endBreath);
+        lifeline.addEventListener('mouseleave', endBreath);
+        lifeline.addEventListener('touchstart', (e) => { e.preventDefault(); startBreath(); });
+        lifeline.addEventListener('touchend', endBreath);
+
+    </script>
+</body>
+</html>
