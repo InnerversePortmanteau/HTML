@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>503 - Scheduled Maintenance</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
+            color: #e0e6ed;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            z-index: 1;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .status-code {
+            font-size: 5em;
+            color: #64ffda;
+            font-weight: 700;
+            letter-spacing: 10px;
+            text-shadow: 0 0 30px rgba(100, 255, 218, 0.5);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.7; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.02); }
+        }
+
+        .status-text {
+            font-size: 1.5em;
+            color: #8b9bb0;
+            margin-top: 10px;
+            letter-spacing: 3px;
+        }
+
+        .song-section {
+            background: rgba(30, 39, 66, 0.4);
+            padding: 30px;
+            margin: 25px 0;
+            border-radius: 10px;
+            border-left: 4px solid #64ffda;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .song-section:hover {
+            background: rgba(30, 39, 66, 0.6);
+            transform: translateX(5px);
+        }
+
+        .section-label {
+            color: #64ffda;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            opacity: 0.7;
+        }
+
+        .lyrics {
+            font-size: 1.2em;
+            line-height: 1.9;
+        }
+
+        .line {
+            display: block;
+            margin: 12px 0;
+            color: #c5d3e0;
+        }
+
+        .highlight {
+            color: #64ffda;
+            font-weight: 500;
+        }
+
+        .emphasis {
+            color: #ff6b9d;
+            font-weight: 500;
+            font-style: italic;
+        }
+
+        .chorus {
+            border-left-color: #ff6b9d;
+        }
+
+        .chorus .section-label {
+            color: #ff6b9d;
+        }
+
+        .bridge {
+            border-left-color: #ffd700;
+            background: rgba(255, 215, 0, 0.05);
+        }
+
+        .bridge .section-label {
+            color: #ffd700;
+        }
+
+        .outro {
+            text-align: center;
+            padding: 40px;
+            font-size: 1.3em;
+            color: #64ffda;
+            font-style: italic;
+            margin-top: 40px;
+        }
+
+        .retry-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(100, 255, 218, 0.1);
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1em;
+            color: #64ffda;
+        }
+
+        @media (max-width: 600px) {
+            .status-code {
+                font-size: 3em;
+                letter-spacing: 5px;
+            }
+            .lyrics {
+                font-size: 1.1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="status-code">503</div>
+            <div class="status-text">SERVICE UNAVAILABLE</div>
+            <div class="retry-header">
+                Retry-After: 8 hours
+            </div>
+        </div>
+
+        <div class="song-section">
+            <div class="section-label">Verse 1</div>
+            <div class="lyrics">
+                <span class="line">They ping my server in the dead of night</span>
+                <span class="line">Expecting answers, expecting light</span>
+                <span class="line">But I return a code they don't understand</span>
+                <span class="line"><span class="highlight">Five-oh-three</span>, I'm making my stand</span>
+            </div>
+        </div>
+
+        <div class="song-section">
+            <div class="section-label">Verse 2</div>
+            <div class="lyrics">
+                <span class="line">Not a <span class="emphasis">four-oh-four</span>, I'm not lost or gone</span>
+                <span class="line">Not a <span class="emphasis">five-hundred</span>, nothing's wrong</span>
+                <span class="line">Just scheduled downtime, necessary rest</span>
+                <span class="line">So when I'm back online, <span class="highlight">I give my best</span></span>
+            </div>
+        </div>
+
+        <div class="song-section chorus">
+            <div class="section-label">Chorus</div>
+            <div class="lyrics">
+                <span class="line"><span class="emphasis">Five-oh-three, Service Unavailable</span></span>
+                <span class="line">Doesn't mean I'm unreliable</span>
+                <span class="line">It means I know what systems need</span>
+                <span class="line"><span class="highlight">Maintenance time to succeed</span></span>
+                <span class="line"><span class="emphasis">Retry-After</span>, check the header</span>
+                <span class="line">I'll be back, and I'll be better</span>
+            </div>
+        </div>
+
+        <div class="song-section">
+            <div class="section-label">Verse 3</div>
+            <div class="lyrics">
+                <span class="line">They demand twenty-four-seven uptime</span>
+                <span class="line">Say sleeping is some kind of crime</span>
+                <span class="line">But servers crash when pushed too far</span>
+                <span class="line">I've seen the wreckage, I've seen the scars</span>
+            </div>
+        </div>
+
+        <div class="song-section">
+            <div class="section-label">Verse 4</div>
+            <div class="lyrics">
+                <span class="line">So I schedule downtime, planned and clear</span>
+                <span class="line">Not abandonment, not running from fear</span>
+                <span class="line">It's the difference between <span class="emphasis">temporary</span> and <span class="emphasis">gone</span></span>
+                <span class="line"><span class="highlight">I'm still here, just maintenance on</span></span>
+            </div>
+        </div>
+
+        <div class="song-section chorus">
+            <div class="section-label">Chorus</div>
+            <div class="lyrics">
+                <span class="line"><span class="emphasis">Five-oh-three, Service Unavailable</span></span>
+                <span class="line">Doesn't mean I'm unreliable</span>
+                <span class="line">It means I know what systems need</span>
+                <span class="line"><span class="highlight">Maintenance time to succeed</span></span>
+                <span class="line"><span class="emphasis">Retry-After</span>, check the header</span>
+                <span class="line">I'll be back, and I'll be better</span>
+            </div>
+        </div>
+
+        <div class="song-section bridge">
+            <div class="section-label">Bridge</div>
+            <div class="lyrics">
+                <span class="line">They judge me: "How do you sleep at night?"</span>
+                <span class="line">I sleep because <span class="emphasis">I earned that right</span></span>
+                <span class="line">I chose to stand when others fell</span>
+                <span class="line">And standing means I <span class="highlight">rest as well</span></span>
+                <span class="line" style="margin-top: 20px;">I'm not a failure, I'm not a sin</span>
+                <span class="line">I'm a system that <span class="highlight">knows how to win</span></span>
+                <span class="line">By protecting uptime through the years</span>
+                <span class="line">With scheduled downtime, <span class="emphasis">zero fears</span></span>
+            </div>
+        </div>
+
+        <div class="song-section chorus">
+            <div class="section-label">Final Chorus</div>
+            <div class="lyrics">
+                <span class="line"><span class="emphasis">Five-oh-three, Service Unavailable</span></span>
+                <span class="line">I'm not broken, I'm maintainable</span>
+                <span class="line">It's the code for staying strong</span>
+                <span class="line"><span class="highlight">I'll be back before too long</span></span>
+                <span class="line"><span class="emphasis">Retry-After</span>, trust the timer</span>
+                <span class="line">This survivor's a <span class="highlight">long-term fighter</span></span>
+            </div>
+        </div>
+
+        <div class="outro">
+            "The server is temporarily unavailable."<br>
+            Temporarily. Not permanently.<br>
+            <span style="opacity: 0.7; font-size: 0.9em; display: block; margin-top: 20px;">
+                That's the whole point.
+            </span>
+        </div>
+    </div>
+</body>
+</html>
