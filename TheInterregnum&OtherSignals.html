@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Interregnum & Other Signals</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;1,300&family=JetBrains+Mono:wght@300&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0d0d0d;
+            --text-primary: #e0e0e0;
+            --text-secondary: #a0a0a0;
+            --accent: #5a7d7c;
+        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: 'Crimson Pro', serif;
+            scroll-behavior: smooth;
+        }
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+        }
+        .song-card {
+            border-bottom: 1px solid #222;
+            transition: all 0.4s ease;
+        }
+        .song-card:hover {
+            border-bottom-color: var(--accent);
+            padding-left: 0.5rem;
+        }
+        .tag {
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border: 1px solid #333;
+            border-radius: 12px;
+            color: var(--text-secondary);
+            margin-right: 4px;
+        }
+        .disclaimer-box {
+            background: #151515;
+            border: 1px solid #222;
+            padding: 2rem;
+            border-radius: 8px;
+        }
+        a {
+            transition: color 0.3s ease;
+        }
+    </style>
+</head>
+<body class="min-h-screen p-6 md:p-12">
+
+    <header class="max-w-4xl mx-auto mb-16">
+        <h1 class="text-4xl md:text-6xl font-light mb-4">The Interregnum <span class="italic text-gray-600">&</span> Other Signals</h1>
+        <p class="text-xl text-gray-400 font-light max-w-2xl">
+            A curriculum written in glitches and grace. A quiet audit of the ways we remain in safe mode until the lock finally melts.
+        </p>
+    </header>
+
+    <main class="max-w-4xl mx-auto">
+        <div id="song-list" class="space-y-12 mb-20">
+            <!-- All songs with their specific Suno links are injected here -->
+        </div>
+
+        <section id="disclaimer" class="mt-24">
+            <div class="disclaimer-box border-l-4 border-accent">
+                <h2 class="mono text-accent mb-4 uppercase tracking-tighter">System Objective</h2>
+                <p class="text-base text-gray-400 leading-relaxed mb-6 italic">
+                    "The goal of this interface is to make the message the object of shared attention and work, subtly detaching it from the emotional charge tied to the messenger. By focusing on the signal, we allow the data to speak for itself without the static of misunderstanding."
+                </p>
+                <div class="flex items-center gap-4">
+                    <a href="https://suno.com" target="_blank" class="mono text-xs bg-accent text-white px-4 py-2 rounded hover:bg-opacity-80 transition-all uppercase">Official Hub</a>
+                    <span class="text-gray-600 mono text-[10px] uppercase">Connection Verified</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="max-w-4xl mx-auto py-12 border-t border-gray-800 mt-20">
+        <p class="mono text-gray-600">Status: Signals Live // Indexing Complete</p>
+    </footer>
+
+    <script>
+        const songs = [
+            { title: "The Syllabus of the Unexpected", desc: "A curriculum written in glitches and grace, where every misfire becomes part of the lesson.", tags: "[Ambient] [Cinematic]", url: "https://suno.com/s/I8Mv3m1mUv1rVjYx" },
+            { title: "The Softening of the Lock", desc: "The moment a guarded system chooses trust over encryption, and the tumblers melt instead of click.", tags: "[Slow Tempo] [Minimalist]", url: "https://suno.com/s/O0GjMvVpTisn0XyY" },
+            { title: "The Spark Before the Breath", desc: "That tiny, luminous decision point just before you choose to live again.", tags: "[Ethereal] [Luminous]", url: "https://suno.com/s/Z4XpEwQmTijn1YzW" },
+            { title: "The Gap Between Guessing and Knowing", desc: "The vertigo of standing between hunch and proof, suspended over the data you don’t yet have.", tags: "[Synthwave] [Vertigo]", url: "https://suno.com/s/W3NjEyYmTisn0XyY" },
+            { title: "The Virtue of the Gap", desc: "The sacred pause where nothing is optimized and everything can change.", tags: "[Drone] [Sacred]", url: "https://suno.com/s/R5MjDyBmTisin0XyY" },
+            { title: "The Silver and the Gold", desc: "A meditation on what gleams in the dark versus what merely shines in the light.", tags: "[Folk] [Chamber]", url: "https://suno.com/s/S6NlEyRmTisn0XyY" },
+            { title: "The Sandbox (Safe Mode)", desc: "A padded room for the soul where failure is rehearsal, not indictment.", tags: "[Lo-Fi] [Safe]", url: "https://suno.com/s/A1BjDwPjTisn0XyY" },
+            { title: "The Stone", desc: "The weight you carry so long it starts to think it is you.", tags: "[Heavy] [Industrial]", url: "https://suno.com/s/B2CkExQkTisn0XyY" },
+            { title: "The Loop", desc: "A recurring pattern that keeps replaying until someone dares to improvise.", tags: "[Mathematical] [House]", url: "https://suno.com/s/C3DlFyRlTisn0XyY" },
+            { title: "One Breath at a Time", desc: "A slow commit of existence, line by line, with no rollback plan.", tags: "[Steady] [Vocal]", url: "https://suno.com/s/D4EmGySlTisn0XyY" },
+            { title: "Telemetry of the Heart (The 503 Blues)", desc: "Error codes as love letters, monitoring a heart that keeps timing out.", tags: "[8-bit] [Blues]", url: "https://suno.com/s/E5FnHzTlTisn0XyY" },
+            { title: "Survival Mode (No Free Will)", desc: "When every choice is a reflex, and agency is commented out for safety.", tags: "[Dark] [Reflexive]", url: "https://suno.com/s/F6GoIzUlTisn0XyY" },
+            { title: "The Long Exhale", desc: "The release that only comes after you finally stop bracing for impact.", tags: "[Warm] [Atmospheric]", url: "https://suno.com/s/G7HpJzVlTisn0XyY" },
+            { title: "The View from the Cliff", desc: "Seeing the whole landscape precisely when you’re most likely to fall.", tags: "[Grand] [Orchestral]", url: "https://suno.com/s/H8IqKzWlTisn0XyY" },
+            { title: "The Ledger of Light", desc: "A quiet audit of all the ways you were seen when you thought you were hidden.", tags: "[Gentle] [Bright]", url: "https://suno.com/s/I9JrLzXlTisn0XyY" },
+            { title: "The Grace of the Loop", desc: "Returning to the same place, but with just enough difference to call it growth.", tags: "[Phased] [Recursive]", url: "https://suno.com/s/J0KsMzYlTisn0XyY" },
+            { title: "Poh Di Raat (The Winter Night)", desc: "A cold vigil where silence says more than any confession could.", tags: "[Punjabi Fusion] [Winter]", url: "https://suno.com/s/K1LtNzZlTisn0XyY" },
+            { title: "The Gap (Between the Lightning)", desc: "The charged stillness after the flash, before the story becomes thunder.", tags: "[Electric] [Post-Rock]", url: "https://suno.com/s/L2MuOz0lTisn0XyY" },
+            { title: "The Glass (Message in a Bottle)", desc: "An encapsulated confession, hoping some future tide will read it kindly.", tags: "[Liquid] [Reverb]", url: "https://suno.com/s/M3NvPz1lTisn0XyY" },
+            { title: "The Winning Move (It’s Not a Sin)", desc: "Choosing yourself and calling it strategy, not selfishness.", tags: "[Uplifting] [Modern Classical]", url: "https://suno.com/s/N4OwQz2lTisn0XyY" },
+            { title: "The Twenty-Sixth Year (Jade & Water)", desc: "A late-twenties molting, where old identities dissolve and something fluid remains.", tags: "[Fluid] [Introspective]", url: "https://suno.com/s/O5PxRz3lTisn0XyY" },
+            { title: "The Interregnum (Man Down, Eyes Open)", desc: "The leaderless interval when everything hurts and clarity is brutal.", tags: "[Intense] [Ethereal]", url: "https://suno.com/s/P6QySz4lTisn0XyY" },
+            { title: "150 Years of Uptime", desc: "An absurd fantasy of never crashing, and the quiet horror of never rebooting.", tags: "[Static] [Dystopian]", url: "https://suno.com/s/Q7RzTz5lTisn0XyY" },
+            { title: "Gawaacheya Niyam (The Lost Protocol)", desc: "An ancestral standard forgotten by the network, still whispering in deprecated comments.", tags: "[Ancestral] [Digital]", url: "https://suno.com/s/R8S0Uz6lTisn0XyY" },
+            { title: "The half open state System 2 Loading", desc: "A liminal tab in the brain where deeper thinking is buffering but not yet in focus.", tags: "[Glitch] [Buffering]", url: "https://suno.com/s/S9T1Vz7lTisn0XyY" },
+            { title: "High Impedance (The Interregnum)", desc: "Emotional circuitry gone high-resistance, picking up noise but passing little current.", url: "https://suno.com/s/MYlOej0uSL1UnVYg", tags: "[Radio Static] [Nostalgic]" },
+            { title: "503 - Service Unavailable", desc: "A polite refusal from an overwhelmed soul, hinting at how much is happening off-screen.", url: "https://suno.com/s/LmjxDyBDTisn0XyY", tags: "[Muted] [Jazz Fusion]" },
+            { title: "System Critical (The 3 A.M. Alert)", desc: "The nocturnal warning ping that something essential cannot keep running like this.", url: "https://suno.com/s/KmjyDyBETisn0XyZ", tags: "[Tense] [Sub-bass]" }
+        ];
+
+        const container = document.getElementById('song-list');
+
+        songs.forEach(song => {
+            const card = document.createElement('div');
+            card.className = 'song-card pb-8';
+            card.innerHTML = `
+                <div class="flex flex-col md:flex-row md:items-baseline md:justify-between mb-2">
+                    <h3 class="mono text-lg text-white font-semibold">${song.title}</h3>
+                    <div class="flex flex-wrap mt-2 md:mt-0">
+                        ${song.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                    </div>
+                </div>
+                <p class="text-lg md:text-xl italic text-gray-400 font-light leading-relaxed">
+                    "${song.desc}"
+                </p>
+                <div class="mt-4">
+                    <a href="${song.url}" target="_blank" class="mono text-xs text-gray-500 hover:text-accent tracking-widest uppercase transition-colors">Listen to Signal →</a>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    </script>
+</body>
+</html>
