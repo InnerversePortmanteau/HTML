@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Interregnum & Other Signals</title>
+    <!-- Favicon to prevent 404 error -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📡</text></svg>">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;1,300&family=JetBrains+Mono:wght@300&display=swap" rel="stylesheet">
     <style>
@@ -62,7 +64,7 @@
 
     <main class="max-w-4xl mx-auto">
         <div id="song-list" class="space-y-12 mb-20">
-            <!-- All songs with their specific Suno links are injected here -->
+            <!-- All signals injected via JavaScript -->
         </div>
 
         <section id="disclaimer" class="mt-24">
@@ -84,35 +86,36 @@
     </footer>
 
     <script>
+        // Corrected data structure: tags are now arrays to support the .map function
         const songs = [
-            { title: "The Syllabus of the Unexpected", desc: "A curriculum written in glitches and grace, where every misfire becomes part of the lesson.", tags: "[Ambient] [Cinematic]", url: "https://suno.com/s/I8Mv3m1mUv1rVjYx" },
-            { title: "The Softening of the Lock", desc: "The moment a guarded system chooses trust over encryption, and the tumblers melt instead of click.", tags: "[Slow Tempo] [Minimalist]", url: "https://suno.com/s/O0GjMvVpTisn0XyY" },
-            { title: "The Spark Before the Breath", desc: "That tiny, luminous decision point just before you choose to live again.", tags: "[Ethereal] [Luminous]", url: "https://suno.com/s/Z4XpEwQmTijn1YzW" },
-            { title: "The Gap Between Guessing and Knowing", desc: "The vertigo of standing between hunch and proof, suspended over the data you don’t yet have.", tags: "[Synthwave] [Vertigo]", url: "https://suno.com/s/W3NjEyYmTisn0XyY" },
-            { title: "The Virtue of the Gap", desc: "The sacred pause where nothing is optimized and everything can change.", tags: "[Drone] [Sacred]", url: "https://suno.com/s/R5MjDyBmTisin0XyY" },
-            { title: "The Silver and the Gold", desc: "A meditation on what gleams in the dark versus what merely shines in the light.", tags: "[Folk] [Chamber]", url: "https://suno.com/s/S6NlEyRmTisn0XyY" },
-            { title: "The Sandbox (Safe Mode)", desc: "A padded room for the soul where failure is rehearsal, not indictment.", tags: "[Lo-Fi] [Safe]", url: "https://suno.com/s/A1BjDwPjTisn0XyY" },
-            { title: "The Stone", desc: "The weight you carry so long it starts to think it is you.", tags: "[Heavy] [Industrial]", url: "https://suno.com/s/B2CkExQkTisn0XyY" },
-            { title: "The Loop", desc: "A recurring pattern that keeps replaying until someone dares to improvise.", tags: "[Mathematical] [House]", url: "https://suno.com/s/C3DlFyRlTisn0XyY" },
-            { title: "One Breath at a Time", desc: "A slow commit of existence, line by line, with no rollback plan.", tags: "[Steady] [Vocal]", url: "https://suno.com/s/D4EmGySlTisn0XyY" },
-            { title: "Telemetry of the Heart (The 503 Blues)", desc: "Error codes as love letters, monitoring a heart that keeps timing out.", tags: "[8-bit] [Blues]", url: "https://suno.com/s/E5FnHzTlTisn0XyY" },
-            { title: "Survival Mode (No Free Will)", desc: "When every choice is a reflex, and agency is commented out for safety.", tags: "[Dark] [Reflexive]", url: "https://suno.com/s/F6GoIzUlTisn0XyY" },
-            { title: "The Long Exhale", desc: "The release that only comes after you finally stop bracing for impact.", tags: "[Warm] [Atmospheric]", url: "https://suno.com/s/G7HpJzVlTisn0XyY" },
-            { title: "The View from the Cliff", desc: "Seeing the whole landscape precisely when you’re most likely to fall.", tags: "[Grand] [Orchestral]", url: "https://suno.com/s/H8IqKzWlTisn0XyY" },
-            { title: "The Ledger of Light", desc: "A quiet audit of all the ways you were seen when you thought you were hidden.", tags: "[Gentle] [Bright]", url: "https://suno.com/s/I9JrLzXlTisn0XyY" },
-            { title: "The Grace of the Loop", desc: "Returning to the same place, but with just enough difference to call it growth.", tags: "[Phased] [Recursive]", url: "https://suno.com/s/J0KsMzYlTisn0XyY" },
-            { title: "Poh Di Raat (The Winter Night)", desc: "A cold vigil where silence says more than any confession could.", tags: "[Punjabi Fusion] [Winter]", url: "https://suno.com/s/K1LtNzZlTisn0XyY" },
-            { title: "The Gap (Between the Lightning)", desc: "The charged stillness after the flash, before the story becomes thunder.", tags: "[Electric] [Post-Rock]", url: "https://suno.com/s/L2MuOz0lTisn0XyY" },
-            { title: "The Glass (Message in a Bottle)", desc: "An encapsulated confession, hoping some future tide will read it kindly.", tags: "[Liquid] [Reverb]", url: "https://suno.com/s/M3NvPz1lTisn0XyY" },
-            { title: "The Winning Move (It’s Not a Sin)", desc: "Choosing yourself and calling it strategy, not selfishness.", tags: "[Uplifting] [Modern Classical]", url: "https://suno.com/s/N4OwQz2lTisn0XyY" },
-            { title: "The Twenty-Sixth Year (Jade & Water)", desc: "A late-twenties molting, where old identities dissolve and something fluid remains.", tags: "[Fluid] [Introspective]", url: "https://suno.com/s/O5PxRz3lTisn0XyY" },
-            { title: "The Interregnum (Man Down, Eyes Open)", desc: "The leaderless interval when everything hurts and clarity is brutal.", tags: "[Intense] [Ethereal]", url: "https://suno.com/s/P6QySz4lTisn0XyY" },
-            { title: "150 Years of Uptime", desc: "An absurd fantasy of never crashing, and the quiet horror of never rebooting.", tags: "[Static] [Dystopian]", url: "https://suno.com/s/Q7RzTz5lTisn0XyY" },
-            { title: "Gawaacheya Niyam (The Lost Protocol)", desc: "An ancestral standard forgotten by the network, still whispering in deprecated comments.", tags: "[Ancestral] [Digital]", url: "https://suno.com/s/R8S0Uz6lTisn0XyY" },
-            { title: "The half open state System 2 Loading", desc: "A liminal tab in the brain where deeper thinking is buffering but not yet in focus.", tags: "[Glitch] [Buffering]", url: "https://suno.com/s/S9T1Vz7lTisn0XyY" },
-            { title: "High Impedance (The Interregnum)", desc: "Emotional circuitry gone high-resistance, picking up noise but passing little current.", url: "https://suno.com/s/MYlOej0uSL1UnVYg", tags: "[Radio Static] [Nostalgic]" },
-            { title: "503 - Service Unavailable", desc: "A polite refusal from an overwhelmed soul, hinting at how much is happening off-screen.", url: "https://suno.com/s/LmjxDyBDTisn0XyY", tags: "[Muted] [Jazz Fusion]" },
-            { title: "System Critical (The 3 A.M. Alert)", desc: "The nocturnal warning ping that something essential cannot keep running like this.", url: "https://suno.com/s/KmjyDyBETisn0XyZ", tags: "[Tense] [Sub-bass]" }
+            { title: "The Syllabus of the Unexpected", desc: "A curriculum written in glitches and grace, where every misfire becomes part of the lesson.", tags: ["Ambient", "Cinematic"], url: "https://suno.com/s/I8Mv3m1mUv1rVjYx" },
+            { title: "The Softening of the Lock", desc: "The moment a guarded system chooses trust over encryption, and the tumblers melt instead of click.", tags: ["Slow Tempo", "Minimalist"], url: "https://suno.com/s/O0GjMvVpTisn0XyY" },
+            { title: "The Spark Before the Breath", desc: "That tiny, luminous decision point just before you choose to live again.", tags: ["Ethereal", "Luminous"], url: "https://suno.com/s/Z4XpEwQmTijn1YzW" },
+            { title: "The Gap Between Guessing and Knowing", desc: "The vertigo of standing between hunch and proof, suspended over the data you don’t yet have.", tags: ["Synthwave", "Vertigo"], url: "https://suno.com/s/W3NjEyYmTisn0XyY" },
+            { title: "The Virtue of the Gap", desc: "The sacred pause where nothing is optimized and everything can change.", tags: ["Drone", "Sacred"], url: "https://suno.com/s/R5MjDyBmTisin0XyY" },
+            { title: "The Silver and the Gold", desc: "A meditation on what gleams in the dark versus what merely shines in the light.", tags: ["Folk", "Chamber"], url: "https://suno.com/s/S6NlEyRmTisn0XyY" },
+            { title: "The Sandbox (Safe Mode)", desc: "A padded room for the soul where failure is rehearsal, not indictment.", tags: ["Lo-Fi", "Safe"], url: "https://suno.com/s/A1BjDwPjTisn0XyY" },
+            { title: "The Stone", desc: "The weight you carry so long it starts to think it is you.", tags: ["Heavy", "Industrial"], url: "https://suno.com/s/B2CkExQkTisn0XyY" },
+            { title: "The Loop", desc: "A recurring pattern that keeps replaying until someone dares to improvise.", tags: ["Mathematical", "House"], url: "https://suno.com/s/C3DlFyRlTisn0XyY" },
+            { title: "One Breath at a Time", desc: "A slow commit of existence, line by line, with no rollback plan.", tags: ["Steady", "Vocal"], url: "https://suno.com/s/D4EmGySlTisn0XyY" },
+            { title: "Telemetry of the Heart (The 503 Blues)", desc: "Error codes as love letters, monitoring a heart that keeps timing out.", tags: ["8-bit", "Blues"], url: "https://suno.com/s/E5FnHzTlTisn0XyY" },
+            { title: "Survival Mode (No Free Will)", desc: "When every choice is a reflex, and agency is commented out for safety.", tags: ["Dark", "Reflexive"], url: "https://suno.com/s/F6GoIzUlTisn0XyY" },
+            { title: "The Long Exhale", desc: "The release that only comes after you finally stop bracing for impact.", tags: ["Warm", "Atmospheric"], url: "https://suno.com/s/G7HpJzVlTisn0XyY" },
+            { title: "The View from the Cliff", desc: "Seeing the whole landscape precisely when you’re most likely to fall.", tags: ["Grand", "Orchestral"], url: "https://suno.com/s/H8IqKzWlTisn0XyY" },
+            { title: "The Ledger of Light", desc: "A quiet audit of all the ways you were seen when you thought you were hidden.", tags: ["Gentle", "Bright"], url: "https://suno.com/s/I9JrLzXlTisn0XyY" },
+            { title: "The Grace of the Loop", desc: "Returning to the same place, but with just enough difference to call it growth.", tags: ["Phased", "Recursive"], url: "https://suno.com/s/J0KsMzYlTisn0XyY" },
+            { title: "Poh Di Raat (The Winter Night)", desc: "A cold vigil where silence says more than any confession could.", tags: ["Punjabi Fusion", "Winter"], url: "https://suno.com/s/K1LtNzZlTisn0XyY" },
+            { title: "The Gap (Between the Lightning)", desc: "The charged stillness after the flash, before the story becomes thunder.", tags: ["Electric", "Post-Rock"], url: "https://suno.com/s/L2MuOz0lTisn0XyY" },
+            { title: "The Glass (Message in a Bottle)", desc: "An encapsulated confession, hoping some future tide will read it kindly.", tags: ["Liquid", "Reverb"], url: "https://suno.com/s/M3NvPz1lTisn0XyY" },
+            { title: "The Winning Move (It’s Not a Sin)", desc: "Choosing yourself and calling it strategy, not selfishness.", tags: ["Uplifting", "Modern Classical"], url: "https://suno.com/s/N4OwQz2lTisn0XyY" },
+            { title: "The Twenty-Sixth Year (Jade & Water)", desc: "A late-twenties molting, where old identities dissolve and something fluid remains.", tags: ["Fluid", "Introspective"], url: "https://suno.com/s/O5PxRz3lTisn0XyY" },
+            { title: "The Interregnum (Man Down, Eyes Open)", desc: "The leaderless interval when everything hurts and clarity is brutal.", tags: ["Intense", "Ethereal"], url: "https://suno.com/s/P6QySz4lTisn0XyY" },
+            { title: "150 Years of Uptime", desc: "An absurd fantasy of never crashing, and the quiet horror of never rebooting.", tags: ["Static", "Dystopian"], url: "https://suno.com/s/Q7RzTz5lTisn0XyY" },
+            { title: "Gawaacheya Niyam (The Lost Protocol)", desc: "An ancestral standard forgotten by the network, still whispering in deprecated comments.", tags: ["Ancestral", "Digital"], url: "https://suno.com/s/R8S0Uz6lTisn0XyY" },
+            { title: "The half open state System 2 Loading", desc: "A liminal tab in the brain where deeper thinking is buffering but not yet in focus.", tags: ["Glitch", "Buffering"], url: "https://suno.com/s/S9T1Vz7lTisn0XyY" },
+            { title: "High Impedance (The Interregnum)", desc: "Emotional circuitry gone high-resistance, picking up noise but passing little current.", tags: ["Radio Static", "Nostalgic"], url: "https://suno.com/s/MYlOej0uSL1UnVYg" },
+            { title: "503 - Service Unavailable", desc: "A polite refusal from an overwhelmed soul, hinting at how much is happening off-screen.", tags: ["Muted", "Jazz Fusion"], url: "https://suno.com/s/LmjxDyBDTisn0XyY" },
+            { title: "System Critical (The 3 A.M. Alert)", desc: "The nocturnal warning ping that something essential cannot keep running like this.", tags: ["Tense", "Sub-bass"], url: "https://suno.com/s/KmjyDyBETisn0XyZ" }
         ];
 
         const container = document.getElementById('song-list');
